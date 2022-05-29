@@ -47,6 +47,7 @@ function	SectionUnderstandSetup(): ReactElement {
 
 						<p>
 							<a href={'https://docs.keep3r.network/core/keepers'} target={'_blank'} rel={'noreferrer'} className={'underline'}>
+								<span className={'sr-only'}>{'Learn more about the keepers'}</span>
 								{'More'}
 							</a>
 							{' about keeper\'s lifecycle.'}
