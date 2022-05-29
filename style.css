@@ -1,0 +1,77 @@
+/* This will load Tailwindcss + all the overwrite from Yearn lib */
+@import '@yearn/web-lib/dist/style.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;800&display=swap');
+
+/* 📰 - Keep3r *****************************************************************
+** Styling overwrites for the Keep3r theme
+******************************************************************************/
+:root [data-theme="system-prefs"],
+:root [data-theme="light"],
+:root [data-theme="dark"],
+:root {
+	--color-background: 255 255 255;
+	--color-background-variant: 255 255 255;
+	--color-surface: 255 255 255;
+	--color-surface-variant: 255 255 255;
+	--color-primary: 0 0 0;
+	--color-primary-variant: 0 0 0;
+	--color-secondary: 0 0 0;
+	--color-secondary-variant: 0 0 0;
+	--color-disabled: 0 0 0;
+	--color-dark: 0 0 0;
+	--color-icons-primary: 0 0 0;
+	--color-icons-variant: 0 0 0;
+	--color-typo-primary: 0 0 0;
+	--color-typo-primary-variant: 0 0 0;
+	--color-typo-secondary: 0 0 0;
+	--color-typo-secondary-variant: 0 0 0;
+	--color-typo-off: 0 0 0;
+	--color-button-filled-primary: 0 0 0;
+	--color-button-filled-variant: 0 0 0;
+	--color-button-filled-text: 0 0 0;
+	--color-button-outlined-primary: 0 0 0;
+	--color-button-outlined-variant: 0 0 0;
+	--color-button-outlined-text: 0 0 0;
+	--color-button-disabled-primary: 0 0 0;
+	--color-button-disabled-text: 0 0 0;
+}
+input::placeholder {@apply text-grey-2 not-italic}
+textarea::placeholder {@apply text-grey-2 not-italic}
+#nprogress .bar {@apply bg-white}
+#nprogress .spinner-icon {@apply border-t-white border-l-white;}
+
+/* 📰 - Keep3r *****************************************************************
+** Shorthand for some group of style used across the application
+******************************************************************************/
+.menu_item {
+	@apply flex flex-col space-y-3 cursor-pointer;
+	& > b {@apply text-grey-2 transition-colors;}
+	& > div {@apply w-full h-1 bg-transparent transition-colors;}
+	&:hover {
+		& > b {@apply text-grey-3;}
+		& > div {@apply w-full h-1 bg-grey-3;}
+	}
+	&[aria-selected="true"] {
+		& > b {@apply text-white group-hover:text-white;}
+		& > div {@apply bg-white;}
+	}
+}
+
+.yearn--button {
+	@apply cursor-pointer px-3 flex justify-center items-center h-12 text-intermediate transition-colors relative rounded-none w-full;
+
+	&[data-variant="filled"] {
+		@apply text-white bg-black font-bold;
+		&:disabled {@apply bg-grey-3 text-grey-2;}
+		&:not(:disabled):not(&[aria-busy="true"]):hover {@apply bg-grey-1;}
+	}
+	&[data-variant="reverted"] {
+		@apply text-black bg-white font-bold border-black border;
+		&:disabled {@apply bg-grey-3 text-grey-2 border-grey-3;}
+		&:not(:disabled):not(&[aria-busy="true"]):hover {@apply bg-grey-4;}
+	}
+	&[aria-busy="true"] {@apply !text-white/0 cursor-wait;}
+	&:disabled {@apply cursor-not-allowed;}
+}
+
+.image-align-middle {}
