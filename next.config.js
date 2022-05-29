@@ -20,7 +20,7 @@ module.exports = ({
 		WEBSITE_TITLE: 'The Keep3r Network',
 		WEBSITE_DESCRIPTION: 'All the Jobs That’s Fit to Network.',
 		PROJECT_GITHUB_URL: 'https://github.com/keep3r-network/',
-		BACKEND_URI: 'https://api.keep3r.network',
+		BACKEND_URI: 'https://api.keep3r.network', //Only used for stats
 		// BACKEND_URI: 'http://localhost:8080',
 
 		/* 📰 - Keep3r *********************************************************
