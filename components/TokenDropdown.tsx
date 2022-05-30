@@ -43,7 +43,7 @@ function	TokenDropdownBase({onSelect, withKeeper}: TTokenDropdown): ReactElement
 			}}>
 			{({open}): ReactElement => (
 				<div className={'relative'}>
-					<Listbox.Button className={'flex flex-row justify-between items-center p-2 bg-grey-3 hover:bg-grey-4'}>
+					<Listbox.Button className={'flex flex-row justify-between items-center p-2 w-full bg-grey-3 hover:bg-grey-4'}>
 						<div className={'flex flex-row items-center space-x-2'}>
 							{selected.address === '0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44' ? (
 								<div className={'flex flex-row -space-x-4 w-12 h-8'}>
