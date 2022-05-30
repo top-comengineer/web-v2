@@ -156,7 +156,6 @@ function	SectionActionsWithdrawLiquidity(): ReactElement {
 					!isActive
 					|| !jobStatus.canWithdraw
 					|| jobStatus.pendingUnbonds.isZero()
-					|| jobStatus.jobOwner !== address
 				}>
 				{txStatus.error ? 'Transaction failed' : txStatus.success ? 'Transaction successful' : jobStatus.canWithdraw ? 'Withdraw' : `Withdraw (${jobStatus.canWithdrawIn})`}
 			</Button>
@@ -184,7 +183,7 @@ function	SectionActionsWithdrawLiquidity(): ReactElement {
 				isDisabled={
 					!isActive
 					|| ethers.utils.parseUnits(amountLpToken || '0', 18).isZero()
-					|| jobStatus.jobOwner !== address
+					|| Number(amountLpToken) > Number(format.units(pair?.balanceOfPair || 0, 18))
 				}>
 				{txStatusBurn.error ? 'Transaction failed' : txStatusBurn.success ? 'Transaction successful' : 'Burn'}
 			</Button>

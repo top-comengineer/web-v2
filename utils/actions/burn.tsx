@@ -1,4 +1,5 @@
 import	{ContractInterface, ethers} from	'ethers';
+import	{providers}					from	'@yearn/web-lib/utils';
 import	UNI_V3_PAIR_ABI				from	'utils/abi/univ3Pair.abi';
 
 export async function	simulateBurn(
@@ -13,14 +14,15 @@ export async function	simulateBurn(
 		const	contract = new ethers.Contract(
 			pair,
 			UNI_V3_PAIR_ABI as ContractInterface,
-			signer
+			providers.getProvider(1)
 		);
 		try {
 			const	simulation = await contract.callStatic.burn(
 				liquidity, //liquidity
 				ethers.constants.Zero, //amount0Min
 				ethers.constants.Zero, //amount1Min
-				address //to
+				address, //to
+				{from: address}
 			);
 			const	amount0Min = Number(ethers.utils.formatUnits(simulation.amount0, 18));
 			const	amount1Min = Number(ethers.utils.formatUnits(simulation.amount1, 18));
@@ -34,7 +36,6 @@ export async function	simulateBurn(
 		}
 	
 	} catch(error) {
-		console.error(error);
 		return ([ethers.constants.Zero, ethers.constants.Zero]);
 	}
 }

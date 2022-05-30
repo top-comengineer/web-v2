@@ -91,16 +91,26 @@ function	InputBigNumber({
 				placeholder={'0.00000000'}
 				max={format.toNormalizedValue(maxValue, decimals)}
 				onMaxClick={(): void => {
-					if (!maxValue.isZero())
-						onChange(format.toNormalizedValue(maxValue, decimals).toString());
+					if (!maxValue.isZero()) {
+						const	valueAsString = format.toNormalizedValue(maxValue, decimals).toString();
+						if (valueAsString.includes('e')) {
+							return;
+						}
+						onChange(valueAsString);
+					}
 				}}
 				withMax
 				disabled={props.disabled} />
 			{shouldHideBalance ? null : <p
 				className={'text-xs cursor-pointer'}
 				onClick={(): void => {
-					if (!maxValue.isZero())
-						onChange(format.toNormalizedValue(maxValue, decimals).toString());
+					if (!maxValue.isZero()) {
+						const	valueAsString = format.toNormalizedValue(maxValue, decimals).toString();
+						if (valueAsString.includes('e')) {
+							return;
+						}
+						onChange(valueAsString);
+					}
 				}}>
 				{`Balance: ${format.toNormalizedAmount(maxValue, decimals)}`}
 			</p>}
