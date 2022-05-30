@@ -231,7 +231,7 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 		const	mim3CrvEarned = resultsJobsCall[rIndex++] as BigNumber;
 		const	mim3CrvPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
 		_treasury.push({
-			name: 'mim3Crv + USDC',
+			name: 'mim3Crv',
 			protocol: 'Convex',
 			rewards: 'CVX',
 			tokenStaked: Number(mim3CrvStacked),
