@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import	React, {MouseEventHandler, ReactElement, ReactNode}			from	'react';
+import	React, {ReactElement, ReactNode}			from	'react';
 import	{useTable, usePagination, useSortBy}		from	'react-table';
 import	Link										from	'next/link';
 import	axios										from	'axios';

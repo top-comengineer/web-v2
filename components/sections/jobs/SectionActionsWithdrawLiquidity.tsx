@@ -104,7 +104,7 @@ function	PanelUnbondTokens(): ReactElement {
 }
 
 function	SectionActionsWithdrawLiquidity(): ReactElement {
-	const	{provider, address, isActive} = useWeb3();
+	const	{provider, isActive} = useWeb3();
 	const	{pairs, getPairs} = usePairs();
 	const	{jobStatus, getJobStatus} = useJob();
 	const	[amountLpToken, set_amountLpToken] = React.useState('');
