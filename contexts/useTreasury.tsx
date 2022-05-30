@@ -67,7 +67,7 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 			
 			ibjpyUsdcContract.balanceOf(process.env.THE_KEEP3R as string),
 			ibjpyUsdcContract.earned(process.env.THE_KEEP3R as string),
-			lensPriceContract.getPriceUsdcRecommended('0xEB0265938c1190Ab4E3E1f6583bC956dF47C0F93'),
+			lensPriceContract.getPriceUsdcRecommended('0x5555f75e3d5278082200fb451d1b6ba946d8e13b'),
 			
 			ibkrwUsdcContract.balanceOf(process.env.THE_KEEP3R as string),
 			ibkrwUsdcContract.earned(process.env.THE_KEEP3R as string),
