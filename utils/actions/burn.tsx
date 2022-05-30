@@ -15,20 +15,24 @@ export async function	simulateBurn(
 			UNI_V3_PAIR_ABI as ContractInterface,
 			signer
 		);
-		const	simulation = await contract.callStatic.burn(
-			liquidity, //liquidity
-			ethers.constants.Zero, //amount0Min
-			ethers.constants.Zero, //amount1Min
-			address //to
-		);
+		try {
+			const	simulation = await contract.callStatic.burn(
+				liquidity, //liquidity
+				ethers.constants.Zero, //amount0Min
+				ethers.constants.Zero, //amount1Min
+				address //to
+			);
+			const	amount0Min = Number(ethers.utils.formatUnits(simulation.amount0, 18));
+			const	amount1Min = Number(ethers.utils.formatUnits(simulation.amount1, 18));
+			return ([
+				ethers.utils.parseUnits((amount0Min - (amount0Min * 0.99)).toFixed(18), 18),
+				ethers.utils.parseUnits((amount1Min - (amount1Min * 0.99)).toFixed(18), 18)
 
-		const	amount0Min = Number(ethers.utils.formatUnits(simulation.amount0, 18));
-		const	amount1Min = Number(ethers.utils.formatUnits(simulation.amount1, 18));
-		return ([
-			ethers.utils.parseUnits((amount0Min - (amount0Min * 0.99)).toFixed(18), 18),
-			ethers.utils.parseUnits((amount1Min - (amount1Min * 0.99)).toFixed(18), 18)
-
-		]);
+			]);
+		} catch (error) {
+			return ([ethers.constants.Zero, ethers.constants.Zero]);
+		}
+	
 	} catch(error) {
 		console.error(error);
 		return ([ethers.constants.Zero, ethers.constants.Zero]);

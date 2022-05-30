@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import	React, {ReactElement, ReactNode}			from	'react';
+import	React, {MouseEventHandler, ReactElement, ReactNode}			from	'react';
 import	{useTable, usePagination, useSortBy}		from	'react-table';
 import	Link										from	'next/link';
 import	axios										from	'axios';
@@ -64,7 +64,12 @@ function	LogsStatsForKeeper({keeperAddress, prices, searchTerm}: TWorkLogs): Rea
 		{Header: 'TX fees, ETH', accessor: 'fees', className: 'cell-end pr-8', sortType: 'basic'},
 		{Header: 'GWEI per call', accessor: 'gweiPerCall', className: 'cell-end pr-6', sortType: 'basic'},
 		{Header: '', accessor: 'linkOut', className: 'cell-end', Cell: ({value}: {value: string}): ReactNode => (
-			<div>
+			<div
+				role={'button'}
+				onClick={(event: any): void => {
+					event.stopPropagation();
+					window.open(`https://etherscan.io/address/${value}`, '_blank');
+				}}>
 				<a href={`https://etherscan.io/address/${value}`} target={'_blank'} rel={'noopener noreferrer'}>
 					<LinkOut className={'w-6 h-6 text-black cursor-pointer'} />
 				</a>

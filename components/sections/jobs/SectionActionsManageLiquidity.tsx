@@ -192,7 +192,6 @@ function	SectionActionsManageLiquidity(): ReactElement {
 			tokenToWithdrawContract.decimals(),
 			tokenToWithdrawContract.symbol()
 		]) as unknown[];
-		console.log(results);
 		performBatchedUpdates((): void => {
 			const	[balanceOf, decimals, symbol] = results;
 			set_tokenToWithdrawData({

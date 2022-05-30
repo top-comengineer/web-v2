@@ -71,7 +71,7 @@ function	PanelUnbondTokens(): ReactElement {
 							label={''}
 							value={amountLpToken}
 							onSetValue={(s: string): void => set_amountLpToken(s)}
-							maxValue={jobStatus?.liquidityAmount || 0}
+							maxValue={jobStatus.jobOwner === address ? jobStatus?.liquidityAmount || ethers.constants.Zero : ethers.constants.Zero}
 							decimals={18} />
 					</div>
 					<div className={'mb-6 space-y-2'}>
