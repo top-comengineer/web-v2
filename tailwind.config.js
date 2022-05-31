@@ -19,9 +19,14 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			roboto: ['Roboto Slab', ...defaultTheme.fontFamily.sans],
+			'roboto-base': ['Roboto', ...defaultTheme.fontFamily.sans],
 			mono: ['Roboto Mono', ...defaultTheme.fontFamily.mono]
 		},
 		extend: {
+			fontSize: {
+				'3xl': ['32px', '40px'],
+				'6xl': ['56px', '72px']
+			},
 			colors: {
 				'black': '#000000',
 				'black-1': '#131313',

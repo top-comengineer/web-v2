@@ -188,13 +188,15 @@ function	AppWithLayout(props: AppProps): ReactElement {
 								<div />
 							</div>
 						</Link>
-						{/* <div aria-selected={pathname === '/about'} className={'px-5 menu_item'}>
-							<b>{'About'}</b>
-							<div />
-						</div> */}
 						<Link href={'/disputes'}>
 							<div aria-selected={pathname === '/disputes'} className={'px-5 menu_item'}>
 								<b>{'Disputes'}</b>
+								<div />
+							</div>
+						</Link>
+						<Link href={'/press'}>
+							<div aria-selected={pathname === '/press'} className={'px-5 menu_item'}>
+								<b>{'Press kit'}</b>
 								<div />
 							</div>
 						</Link>
