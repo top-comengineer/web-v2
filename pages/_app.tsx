@@ -195,17 +195,11 @@ function	AppWithLayout(props: AppProps): ReactElement {
 							</div>
 						</Link>
 						<Link href={'/press'}>
-							<div aria-selected={pathname === '/press'} className={'px-5 menu_item'}>
+							<div aria-selected={pathname === '/press'} className={'pl-5 menu_item'}>
 								<b>{'Press kit'}</b>
 								<div />
 							</div>
 						</Link>
-						<a href={'https://v1.keep3r.network/'} target={'_blank'} rel={'noopener noreferrer'}>
-							<div aria-selected={pathname === 'v1'} className={'pl-5 menu_item'}>
-								<b>{'v1'}</b>
-								<div />
-							</div>
-						</a>
 					</nav>
 					<div className={'flex flex-row items-end'}>
 						<div className={'flex flex-col mr-5 space-y-3'}>
