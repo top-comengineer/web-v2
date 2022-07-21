@@ -76,13 +76,13 @@ function	SectionBestJobs(): ReactElement {
 				) : null}
 				{jobsWithOrder.map((job, index): ReactElement => (
 					<Link href={`/jobs/${job.address}`} key={index}>
-						<div className={'grid grid-cols-3 gap-2 py-6 px-4 bg-white hover:bg-grey-4 transition-colors cursor-pointer'}>
+						<div className={'grid grid-cols-3 gap-4 py-6 px-4 bg-white hover:bg-grey-4 transition-colors cursor-pointer md:gap-2'}>
 							<div className={'col-span-2 space-y-2'}>
-								<div className={'flex flex-row items-center space-x-2 md:space-x-4'}>
-									<b className={'overflow-hidden text-xl text-ellipsis'}>
+								<div className={'flex flex-row items-center'}>
+									<b className={'overflow-hidden pr-2 text-xl text-ellipsis md:pr-0'}>
 										{job.name || 'Unverified job'}
 									</b>
-									{job.name ? <IconBadgeCheck className={'w-6 h-6'} /> : null}
+									{job.name ? <IconBadgeCheck className={'ml-auto w-4 min-w-[16px] h-4 min-h-[16px] md:ml-4 md:w-6 md:min-w-[24px] md:h-6 md:min-h-[24px]'} /> : null}
 								</div>
 								<p className={'text-grey-1'}>
 									{utils.truncateHex(job.address, 5)}
