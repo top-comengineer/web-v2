@@ -1,6 +1,6 @@
 import	React, {ReactElement}					from	'react';
 import	{BigNumber, ethers}						from	'ethers';
-import	{format, performBatchedUpdates}			from	'@yearn/web-lib/utils';
+import	{format, performBatchedUpdates}			from	'@yearn-finance/web-lib/utils';
 
 type 		TInput = {
 	value: string,
@@ -30,13 +30,13 @@ function	InputBase({
 			}}>
 			<div
 				aria-label={ariaLabel}
-				className={`flex flex-row items-center py-2 h-12 px-4 w-full text-black bg-grey-3 border-2 border-grey-3 focus-within:border-black transition-colors ${className}`}>
+				className={`flex h-12 w-full flex-row items-center border-2 border-grey-3 bg-grey-3 py-2 px-4 text-black transition-colors focus-within:border-black ${className}`}>
 				<span className={'sr-only'}>{ariaLabel}</span>
 				<input
 					value={value}
 					onChange={(e): void => onChange(e.target.value)}
 					type={'text'}
-					className={'p-0 w-full bg-white/0 border-none focus:border-none outline-none focus:outline-none focus:ring-0'}
+					className={'w-full border-none bg-white/0 p-0 outline-none focus:border-none focus:outline-none focus:ring-0'}
 					{...props} />
 				{withMax ? <div
 					className={'ml-2 cursor-pointer'}
@@ -102,7 +102,7 @@ function	InputBigNumber({
 				withMax
 				disabled={props.disabled} />
 			{shouldHideBalance ? null : <p
-				className={'text-xs cursor-pointer'}
+				className={'cursor-pointer text-xs'}
 				onClick={(): void => {
 					if (!maxValue.isZero()) {
 						const	valueAsString = format.toNormalizedValue(maxValue, decimals).toString();

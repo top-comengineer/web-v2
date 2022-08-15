@@ -1,11 +1,11 @@
 import	React, {ReactElement}				from	'react';
 import	{ethers}							from	'ethers';
 import	{Contract}							from	'ethcall';
-import	{Button}							from	'@yearn/web-lib/components';
+import	{Button}							from	'@yearn-finance/web-lib/components';
 import	{format, isZeroAddress, providers,
 	performBatchedUpdates, toAddress,
-	Transaction, defaultTxStatus}			from	'@yearn/web-lib/utils';
-import	{useWeb3}							from	'@yearn/web-lib/contexts';
+	Transaction, defaultTxStatus}			from	'@yearn-finance/web-lib/utils';
+import	{useWeb3}							from	'@yearn-finance/web-lib/contexts';
 import	useKeep3r							from	'contexts/useKeep3r';
 import	Input								from	'components/Input';
 import	TokenDropdown						from	'components/TokenDropdown';
@@ -151,8 +151,8 @@ function	SectionSlash(): ReactElement {
 		<div className={'flex flex-col'}>
 			<h2 className={'text-xl font-bold'}>{'SLASHES'}</h2>
 			<div className={'mt-6'}>
-				<div className={'grid grid-cols-5 gap-4 mb-8'}>
-					<div className={'flex flex-col col-span-3 space-y-2'}>
+				<div className={'mb-8 grid grid-cols-5 gap-4'}>
+					<div className={'col-span-3 flex flex-col space-y-2'}>
 						<span>
 							<b className={'hidden text-black-1 md:block'}>{'Slash keeper and its bonded assets'}</b>
 							<b className={'block text-black-1 md:hidden'}>{'Slash keeper'}</b>
@@ -168,7 +168,7 @@ function	SectionSlash(): ReactElement {
 								placeholder={'0x...'} />
 						</label>
 					</div>
-					<div className={'flex flex-col col-span-2 space-y-2'}>
+					<div className={'col-span-2 flex flex-col space-y-2'}>
 						<b className={'text-black-1'}>{'Token bonded'}</b>
 						<div>
 							{isKeeper ? 
@@ -182,7 +182,7 @@ function	SectionSlash(): ReactElement {
 					</div>
 				</div>
 
-				<div className={'grid grid-cols-2 gap-4 mt-2 mb-8'}>
+				<div className={'mt-2 mb-8 grid grid-cols-2 gap-4'}>
 					<label
 						aria-invalid={ethers.utils.parseUnits(amountOfTokenBonded || '0', 18).gt(slashed?.bonds || 0)}
 						className={'space-y-2'}>
@@ -199,7 +199,7 @@ function	SectionSlash(): ReactElement {
 					</label>
 					<label
 						aria-invalid={ethers.utils.parseUnits(amountOfTokenUnbonded || '0', 18).gt(slashed.bonds)}
-						className={`space-y-2 ${!isKeeper ? 'opacity-40 cursor-not-allowed' : ''}`}>
+						className={`space-y-2 ${!isKeeper ? 'cursor-not-allowed opacity-40' : ''}`}>
 						<b className={'text-black-1'}>{'Amount of unbonded tokens'}</b>
 						<div className={!isKeeper ? 'pointer-events-none cursor-not-allowed' : ''}>
 							<Input.BigNumber

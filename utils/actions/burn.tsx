@@ -1,5 +1,5 @@
 import	{ContractInterface, ethers} from	'ethers';
-import	{providers}					from	'@yearn/web-lib/utils';
+import	{providers}					from	'@yearn-finance/web-lib/utils';
 import	UNI_V3_PAIR_ABI				from	'utils/abi/univ3Pair.abi';
 
 export async function	simulateBurn(

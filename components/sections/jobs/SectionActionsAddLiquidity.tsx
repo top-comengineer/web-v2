@@ -1,9 +1,9 @@
 import	React, {ReactElement}					from	'react';
 import	{BigNumber, ethers}						from	'ethers';
-import	{Button}								from	'@yearn/web-lib/components';
-import	{useWeb3}								from	'@yearn/web-lib/contexts';
+import	{Button}								from	'@yearn-finance/web-lib/components';
+import	{useWeb3}								from	'@yearn-finance/web-lib/contexts';
 import	{format, performBatchedUpdates,
-	Transaction, defaultTxStatus}				from	'@yearn/web-lib/utils';
+	Transaction, defaultTxStatus}				from	'@yearn-finance/web-lib/utils';
 import	usePairs								from	'contexts/usePairs';
 import	useJob									from	'contexts/useJob';
 import	Input									from	'components/Input';
@@ -125,7 +125,7 @@ function	PanelMintTokens(): ReactElement {
 			<div className={'mt-8 mb-10 space-y-6'}>
 				<TokenPairDropdown name={'kLP-KP3R/WETH'} />
 				<div>
-					<div className={'grid grid-cols-1 gap-4 mb-4 md:grid-cols-2'}>
+					<div className={'mb-4 grid grid-cols-1 gap-4 md:grid-cols-2'}>
 						<Input.BigNumber
 							label={'KP3R'}
 							value={amountToken1}
@@ -234,7 +234,7 @@ function	SectionActionsAddLiquidity(): ReactElement {
 			<b className={'text-lg'}>{'Add liquidity'}</b>
 			<div className={'mt-8 space-y-6'}>
 				<div>
-					<div className={'grid grid-cols-1 gap-4 mb-4 md:grid-cols-2'}>
+					<div className={'mb-4 grid grid-cols-1 gap-4 md:grid-cols-2'}>
 						<div className={'space-y-2'}>
 							<TokenPairDropdown name={'kLP-KP3R/WETH'} />
 						</div>

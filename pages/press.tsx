@@ -20,7 +20,7 @@ function	LogoFont(): ReactElement {
 
 function	Index(): ReactElement {
 	return (
-		<main className={'flex flex-col col-span-12 px-4 my-10 mx-auto w-full max-w-6xl min-h-[100vh]'}>
+		<main className={'col-span-12 my-10 mx-auto flex min-h-[100vh] w-full max-w-6xl flex-col px-4'}>
 			<section aria-label={'Press Kit'} className={'pl-8'}>
 				<div className={'mb-8'}>
 					<h2 className={'mb-2 text-6xl font-bold'}>{'Press Kit'}</h2>
@@ -32,8 +32,8 @@ function	Index(): ReactElement {
 
 				<section aria-label={'Assets'} className={'mb-20'}>
 					<div className={'mb-10'}>
-						<div className={'flex relative flex-row items-center mb-6 -ml-8'}>
-							<div className={'flex items-center mr-4 w-4 min-w-[16px] h-10'}>
+						<div className={'relative mb-6 -ml-8 flex flex-row items-center'}>
+							<div className={'mr-4 flex h-10 w-4 min-w-[16px] items-center'}>
 								<IconGem />
 							</div>
 							<h3 className={'text-3xl font-bold'}>{'Assets'}</h3>
@@ -42,7 +42,7 @@ function	Index(): ReactElement {
 						<p>{'PNG assets lose quality when scaled but they have wide compatibility across all platforms.'}</p>
 					</div>
 
-					<div className={'flex flex-row mb-10 space-x-8'}>
+					<div className={'mb-10 flex flex-row space-x-8'}>
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>{'The Keep3r Logo'}</b>
 							<div>
@@ -144,8 +144,8 @@ function	Index(): ReactElement {
 
 				<section aria-label={'Colors'} className={'mb-20'}>
 					<div className={'mb-10'}>
-						<div className={'flex relative flex-row items-center mb-6 -ml-8'}>
-							<div className={'flex items-center mr-4 w-4 min-w-[16px] h-10'}>
+						<div className={'relative mb-6 -ml-8 flex flex-row items-center'}>
+							<div className={'mr-4 flex h-10 w-4 min-w-[16px] items-center'}>
 								<IconGem />
 							</div>
 							<h3 className={'text-3xl font-bold'}>{'Colors'}</h3>
@@ -153,11 +153,11 @@ function	Index(): ReactElement {
 						<p>{'These colors are used in the UI and identity. Grey 5 is the most common background color. Pure colors – for colors.'}</p>
 					</div>
 
-					<div className={'flex flex-row mb-10 space-x-4'}>
+					<div className={'mb-10 flex flex-row space-x-4'}>
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>{'Black'}</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-black'} />
+								<div className={'mb-2 h-[120px] w-[120px] bg-black'} />
 								<p className={'text-black-2'}>{'Pure Black'}</p>
 								<p className={'text-xs text-grey-2'}>{'#000000'}</p>
 							</div>
@@ -165,7 +165,7 @@ function	Index(): ReactElement {
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>&nbsp;</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-black-1'} />
+								<div className={'mb-2 h-[120px] w-[120px] bg-black-1'} />
 								<p className={'text-black-2'}>{'Black 1'}</p>
 								<p className={'text-xs text-grey-2'}>{'#131313'}</p>
 							</div>
@@ -173,15 +173,15 @@ function	Index(): ReactElement {
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>&nbsp;</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-black-2'} />
+								<div className={'mb-2 h-[120px] w-[120px] bg-black-2'} />
 								<p className={'text-black-2'}>{'Black 2'}</p>
 								<p className={'text-xs text-grey-2'}>{'#2B2B2B'}</p>
 							</div>
 						</div>
-						<div className={'flex invisible flex-col space-y-4'}>
+						<div className={'invisible flex flex-col space-y-4'}>
 							<b className={'text-lg'}>&nbsp;</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-black'} />
+								<div className={'mb-2 h-[120px] w-[120px] bg-black'} />
 								<p className={'text-black-2'}>{'skippy'}</p>
 								<p className={'text-xs text-grey-2'}>{'#000000'}</p>
 							</div>
@@ -189,7 +189,7 @@ function	Index(): ReactElement {
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>{'White'}</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-white'} />
+								<div className={'mb-2 h-[120px] w-[120px] bg-white'} />
 								<p className={'text-black-2'}>{'Pure White'}</p>
 								<p className={'text-xs text-grey-2'}>{'#FFFFFF'}</p>
 							</div>
@@ -199,7 +199,7 @@ function	Index(): ReactElement {
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>{'Grey'}</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-grey-1'} />
+								<div className={'mb-2 h-[120px] w-[120px] bg-grey-1'} />
 								<p className={'text-black-2'}>{'Grey 1'}</p>
 								<p className={'text-xs text-grey-2'}>{'#4F4F4F'}</p>
 							</div>
@@ -207,7 +207,7 @@ function	Index(): ReactElement {
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>&nbsp;</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-grey-2'} />
+								<div className={'mb-2 h-[120px] w-[120px] bg-grey-2'} />
 								<p className={'text-black-2'}>{'Grey 2'}</p>
 								<p className={'text-xs text-grey-2'}>{'#828282'}</p>
 							</div>
@@ -215,7 +215,7 @@ function	Index(): ReactElement {
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>&nbsp;</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-grey-3'} />
+								<div className={'mb-2 h-[120px] w-[120px] bg-grey-3'} />
 								<p className={'text-black-2'}>{'Grey 3'}</p>
 								<p className={'text-xs text-grey-2'}>{'#E0E0E0'}</p>
 							</div>
@@ -223,7 +223,7 @@ function	Index(): ReactElement {
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>&nbsp;</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-grey-4'} />
+								<div className={'mb-2 h-[120px] w-[120px] bg-grey-4'} />
 								<p className={'text-black-2'}>{'Grey 4'}</p>
 								<p className={'text-xs text-grey-2'}>{'#FBFBFB'}</p>
 							</div>
@@ -231,7 +231,7 @@ function	Index(): ReactElement {
 						<div className={'flex flex-col space-y-4'}>
 							<b className={'text-lg'}>&nbsp;</b>
 							<div>
-								<div className={'mb-2 w-[120px] h-[120px] bg-grey-5 border border-grey-3'} />
+								<div className={'mb-2 h-[120px] w-[120px] border border-grey-3 bg-grey-5'} />
 								<p className={'text-black-2'}>{'Grey 5'}</p>
 								<p className={'text-xs text-grey-2'}>{'#F1F1F1'}</p>
 							</div>
@@ -241,8 +241,8 @@ function	Index(): ReactElement {
 
 				<section aria-label={'Fonts'} className={'mb-20'}>
 					<div className={'mb-10'}>
-						<div className={'flex relative flex-row items-center mb-6 -ml-8'}>
-							<div className={'flex items-center mr-4 w-4 min-w-[16px] h-10'}>
+						<div className={'relative mb-6 -ml-8 flex flex-row items-center'}>
+							<div className={'mr-4 flex h-10 w-4 min-w-[16px] items-center'}>
 								<IconGem />
 							</div>
 							<h3 className={'text-3xl font-bold'}>{'Fonts'}</h3>
@@ -260,21 +260,21 @@ function	Index(): ReactElement {
 							</div>
 						</div>
 						<div className={'flex flex-col'}>
-							<p className={'flex items-end h-10 text-3xl'}>{'Roboto Slab'}</p>
+							<p className={'flex h-10 items-end text-3xl'}>{'Roboto Slab'}</p>
 							<div className={'mt-1'}>
 								<p className={'text-xs text-grey-2'}>{'For texts'}</p>
 								<p className={'mt-[-2px] text-xs text-grey-2'}>{'Free Google Font'}</p>
 							</div>
 						</div>
 						<div className={'flex flex-col'}>
-							<p className={'flex items-end h-10 font-mono text-3xl'}>{'Roboto Mono'}</p>
+							<p className={'flex h-10 items-end font-mono text-3xl'}>{'Roboto Mono'}</p>
 							<div className={'mt-1'}>
 								<p className={'text-xs text-grey-2'}>{'For numbers and hashs'}</p>
 								<p className={'mt-[-2px] text-xs text-grey-2'}>{'Free Google Font'}</p>
 							</div>
 						</div>
-						<div className={'flex flex-col col-span-2 pl-8'}>
-							<p className={'flex items-end h-10 font-roboto-base text-3xl'}>{'Roboto'}</p>
+						<div className={'col-span-2 flex flex-col pl-8'}>
+							<p className={'flex h-10 items-end font-roboto-base text-3xl'}>{'Roboto'}</p>
 							<div className={'mt-1'}>
 								<p className={'text-xs text-grey-2'}>{'For some captions'}</p>
 								<p className={'mt-[-2px] text-xs text-grey-2'}>{'Free Google Font'}</p>

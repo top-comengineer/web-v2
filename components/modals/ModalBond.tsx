@@ -1,11 +1,10 @@
 import	React, {ReactElement}					from	'react';
 import	{ethers}								from	'ethers';
-import	{Cross}									from	'@yearn/web-lib/icons';
-import	{Button}								from	'@yearn/web-lib/components';
-import	{useWeb3}								from	'@yearn/web-lib/contexts';
-import	{format, Transaction, defaultTxStatus}	from	'@yearn/web-lib/utils';
+import	{Cross}									from	'@yearn-finance/web-lib/icons';
+import	{Button, Modal}							from	'@yearn-finance/web-lib/components';
+import	{useWeb3}								from	'@yearn-finance/web-lib/contexts';
+import	{format, Transaction, defaultTxStatus}	from	'@yearn-finance/web-lib/utils';
 import	useKeep3r								from	'contexts/useKeep3r';
-import	{Modal}									from	'components/modals/Modal';
 import	Input									from	'components/Input';
 import	TokenDropdown							from	'components/TokenDropdown';
 import	{bond}									from	'utils/actions/bond';
@@ -103,13 +102,13 @@ function	ModalBond({isOpen, onClose, tokenBonded}: TModalBond): ReactElement {
 		<Modal
 			isOpen={isOpen}
 			onClose={onClose}>
-			<div className={'p-6 space-y-4'}>
-				<div className={'flex justify-between items-center mb-4'}>
+			<div className={'space-y-4 p-6'}>
+				<div className={'mb-4 flex items-center justify-between'}>
 					<h2 className={'text-xl font-bold'}>{'Bond'}</h2>
-					<Cross className={'w-6 h-6 text-black cursor-pointer'} onClick={onClose} />
+					<Cross className={'h-6 w-6 cursor-pointer text-black'} onClick={onClose} />
 				</div>
 				
-				<div className={'grid grid-cols-1 gap-4 mb-4 md:grid-cols-2'}>
+				<div className={'mb-4 grid grid-cols-1 gap-4 md:grid-cols-2'}>
 					<div className={'space-y-6'}>
 						<p>
 							{'To become a keeper, you simply need to call '}
@@ -122,7 +121,7 @@ function	ModalBond({isOpen, onClose, tokenBonded}: TModalBond): ReactElement {
 							{'.'}
 						</p>
 					</div>
-					<div className={'p-6 space-y-10 bg-white'}>
+					<div className={'space-y-10 bg-white p-6'}>
 						<div>
 							<p className={'mb-2'}>{'Balance, KP3R'}</p>
 							<b className={'text-xl'}>{format.toNormalizedAmount(keeperStatus.balanceOf, 18)}</b>
@@ -138,7 +137,7 @@ function	ModalBond({isOpen, onClose, tokenBonded}: TModalBond): ReactElement {
 					</div>
 				</div>
 
-				<div className={'grid grid-cols-2 gap-4 mb-4'}>
+				<div className={'mb-4 grid grid-cols-2 gap-4'}>
 					<div className={'mb-4 space-y-2'}>
 						<b>{'Token'}</b>
 						<TokenDropdown.Fake name={'KP3R'} />
@@ -156,7 +155,7 @@ function	ModalBond({isOpen, onClose, tokenBonded}: TModalBond): ReactElement {
 					</div>
 				</div>
 
-				<div className={'grid grid-cols-2 gap-4 mb-4'}>
+				<div className={'mb-4 grid grid-cols-2 gap-4'}>
 					<div>
 						{bondButton()}
 					</div>

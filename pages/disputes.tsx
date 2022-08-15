@@ -1,8 +1,8 @@
 import	React, {ReactElement}					from	'react';
 import	{Contract}								from	'ethcall';
 import	axios									from	'axios';
-import	{Copy}									from	'@yearn/web-lib/icons';
-import	{copyToClipboard, providers, toAddress}	from	'@yearn/web-lib/utils';
+import	{Copy}									from	'@yearn-finance/web-lib/icons';
+import	{copyToClipboard, providers, toAddress}	from	'@yearn-finance/web-lib/utils';
 import	LogsDispute								from	'components/logs/LogsDispute';
 import	SectionDispute							from	'components/sections/disputes/SectionDispute';
 import	SectionSlash							from	'components/sections/disputes/SectionSlash';
@@ -12,14 +12,14 @@ import	type {TDisputeData, TDispute}			from	'utils/types.d';
 
 function	Disputes({stats}: TDispute): ReactElement {
 	return (
-		<main className={'flex flex-col col-span-12 px-4 mx-auto mt-6 mb-10 w-full max-w-6xl min-h-[100vh]'}>
-			<div className={'grid grid-cols-1 gap-8 mb-14 md:grid-cols-2'}>
-				<div className={'flex flex-col pt-6 space-y-12'}>
+		<main className={'col-span-12 mx-auto mt-6 mb-10 flex min-h-[100vh] w-full max-w-6xl flex-col px-4'}>
+			<div className={'mb-14 grid grid-cols-1 gap-8 md:grid-cols-2'}>
+				<div className={'flex flex-col space-y-12 pt-6'}>
 					<SectionDispute />
 					<SectionSlash />
 					<SectionBlacklist />
 				</div>
-				<div className={'flex flex-col p-6 space-y-10 bg-white'}>
+				<div className={'flex flex-col space-y-10 bg-white p-6'}>
 					<div className={'flex flex-col'}>
 						<h2 className={'mb-4 text-xl font-bold'}>{'DISPUTERS'}</h2>
 						<p>{'Disputers are governance-approved addresses with permission to dispute keepers or jobs that may have acted in bad faith. Once a dispute has started, a slasher will be in charge of evaluating what measures to take.'}</p>
@@ -29,7 +29,7 @@ function	Disputes({stats}: TDispute): ReactElement {
 									<code>{s}</code>
 									<Copy
 										onClick={(): void => copyToClipboard(s)}
-										className={'w-6 h-6 text-black cursor-pointer'} />
+										className={'h-6 w-6 cursor-pointer text-black'} />
 								</div>
 							))}
 						</div>
@@ -44,7 +44,7 @@ function	Disputes({stats}: TDispute): ReactElement {
 									<code>{s}</code>
 									<Copy
 										onClick={(): void => copyToClipboard(s)}
-										className={'w-6 h-6 text-black cursor-pointer'} />
+										className={'h-6 w-6 cursor-pointer text-black'} />
 								</div>
 							))}
 						</div>
@@ -59,11 +59,11 @@ function	Disputes({stats}: TDispute): ReactElement {
 							<li>{'- Manage approved liquidities'}</li>
 							<li>{'- Force-mint credits to a job'}</li>
 						</ul>
-						<div className={'flex flex-row mt-6 space-x-2'}>
+						<div className={'mt-6 flex flex-row space-x-2'}>
 							<code className={'overflow-hidden text-ellipsis'}>{stats.governance}</code>
 							<Copy
 								onClick={(): void => copyToClipboard(stats.governance)}
-								className={'w-6 h-6 text-black cursor-pointer'} />
+								className={'h-6 w-6 cursor-pointer text-black'} />
 						</div>
 					</div>
 				</div>

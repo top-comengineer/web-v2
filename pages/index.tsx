@@ -5,7 +5,7 @@ import	SectionBestJobs			from	'components/sections/home/SectionBestJobs';
 
 function	Index(): ReactElement {
 	return (
-		<main className={'flex flex-col col-span-12 px-4 my-10 mx-auto w-full max-w-6xl min-h-[100vh]'}>
+		<main className={'col-span-12 my-10 mx-auto flex min-h-[100vh] w-full max-w-6xl flex-col px-4'}>
 			<div className={'grid grid-cols-1 gap-12 md:grid-cols-2'}>
 				<section aria-label={'KEEPERS STATUS'}>
 					<SectionKeepersWanted />

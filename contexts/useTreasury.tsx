@@ -1,8 +1,8 @@
 import	React, {ReactElement, useContext, createContext}		from	'react';
 import	{BigNumber}												from	'ethers';
 import	{Contract}												from	'ethcall';
-import	{useWeb3}												from	'@yearn/web-lib/contexts';
-import	{providers, performBatchedUpdates, format}				from	'@yearn/web-lib/utils';
+import	{useWeb3}												from	'@yearn-finance/web-lib/contexts';
+import	{providers, performBatchedUpdates, format}				from	'@yearn-finance/web-lib/utils';
 import	CONVEX_REWARDS_ABI										from	'utils/abi/convexRewards.abi';
 import	YEARN_VAULT_ABI											from	'utils/abi/yearnVault.abi';
 import	LENS_PRICE_ABI											from	'utils/abi/lens.abi';

@@ -1,6 +1,6 @@
 import	React, {ReactElement}				from	'react';
 import	axios								from	'axios';
-import	{format}							from	'@yearn/web-lib/utils';
+import	{format}							from	'@yearn-finance/web-lib/utils';
 import	Input								from	'components/Input';
 import	LogsStatsPerKeeper					from	'components/logs/LogsStatsPerKeeper';
 import	type {TStatsIndexData, TStatsIndex}	from	'utils/types.d';
@@ -16,7 +16,7 @@ function	Stats({stats, prices}: TStatsIndex): ReactElement {
 	return (
 		<>
 			<section aria-label={'general statistics'} className={'mb-4 bg-grey-3'}>
-				<div className={'grid grid-cols-2 gap-6 py-6 px-4 mx-auto w-full max-w-6xl md:grid-cols-5 md:gap-4'}>
+				<div className={'mx-auto grid w-full max-w-6xl grid-cols-2 gap-6 py-6 px-4 md:grid-cols-5 md:gap-4'}>
 					<div className={'space-y-2'}>
 						<p>{'Function calls'}</p>
 						<div>
@@ -51,7 +51,7 @@ function	Stats({stats, prices}: TStatsIndex): ReactElement {
 					</div>
 				</div> 
 			</section>
-			<main className={'flex flex-col col-span-12 px-4 mx-auto mb-10 w-full max-w-6xl min-h-[100vh]'}>
+			<main className={'col-span-12 mx-auto mb-10 flex min-h-[100vh] w-full max-w-6xl flex-col px-4'}>
 				<div className={'mb-8 space-y-2'}>
 					<b>{'Find a Keeper'}</b>
 					<Input

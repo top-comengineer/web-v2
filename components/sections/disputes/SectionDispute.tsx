@@ -1,7 +1,7 @@
 import	React, {ReactElement}							from	'react';
-import	{Button}										from	'@yearn/web-lib/components';
-import	{isZeroAddress, Transaction, defaultTxStatus}	from	'@yearn/web-lib/utils';
-import	{useWeb3}										from	'@yearn/web-lib/contexts';
+import	{Button}										from	'@yearn-finance/web-lib/components';
+import	{isZeroAddress, Transaction, defaultTxStatus}	from	'@yearn-finance/web-lib/utils';
+import	{useWeb3}										from	'@yearn-finance/web-lib/contexts';
 import	useKeep3r										from	'contexts/useKeep3r';
 import	Input											from	'components/Input';
 import	{dispute}										from	'utils/actions/dispute';
@@ -45,7 +45,7 @@ function	SectionDispute(): ReactElement {
 			<p>{'If your job isn\'t necessary anymore, you are able to unbond your kLPs from it and withdraw the underlying tokens after the unbonding period has passed (default 14 days).'}</p>
 			<div className={'mt-6'}>
 				<b className={'text-black-1'}>{'Dispute keeper or job'}</b>
-				<div className={'grid grid-cols-5 gap-4 mt-2 mb-8'}>
+				<div className={'mt-2 mb-8 grid grid-cols-5 gap-4'}>
 					<label
 						aria-invalid={disputeAddress !== '' && isZeroAddress(disputeAddress)}
 						className={'col-span-3'}>
@@ -67,7 +67,7 @@ function	SectionDispute(): ReactElement {
 				</div>
 
 				<b className={'text-black-1'}>{'Resolve a dispute'}</b>
-				<div className={'grid grid-cols-5 gap-4 mt-2 mb-8'}>
+				<div className={'mt-2 mb-8 grid grid-cols-5 gap-4'}>
 					<label
 						aria-invalid={resolveAddress !== '' && isZeroAddress(resolveAddress)}
 						className={'col-span-3'}>

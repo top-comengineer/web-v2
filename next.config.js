@@ -1,55 +1,38 @@
-const Dotenv = require('dotenv-webpack');
+const withPWA = require('next-pwa');
 
-module.exports = ({
-	experimental: {
-		concurrentFeatures: true
-	},
-	plugins: [new Dotenv()],
+module.exports = withPWA({
 	images: {
 		domains: [
-			'rawcdn.githack.com'
+			'rawcdn.githack.com',
+			'raw.githubusercontent.com'
 		]
 	},
+	pwa: {
+		dest: 'public'
+	},
 	env: {
-		/* 📰 - Keep3r *********************************************************
-		** Stuff used for the SEO or some related elements, like the title, the
-		** github url etc.
-		**********************************************************************/
-		WEBSITE_URI: 'https://keep3r.network/',
-		WEBSITE_NAME: 'The Keep3r Network',
-		WEBSITE_TITLE: 'The Keep3r Network',
-		WEBSITE_DESCRIPTION: 'All the Jobs That’s Fit to Network.',
-		PROJECT_GITHUB_URL: 'https://github.com/keep3r-network/',
-		BACKEND_URI: 'https://api.keep3r.network', //Only used for stats
-		// BACKEND_URI: 'http://localhost:8080',
+		CG_IDS: ['ethereum', 'keep3rv1'],
 
 		/* 📰 - Keep3r *********************************************************
-		** Some config used to control the behaviour of the web library. By
-		** default, all of theses are set to false.
-		** USE_WALLET: should we allow the user to connect a wallet via
-		**             metamask or wallet connect?
-		** USE_PRICES: should we fetch the prices for a list of tokens? If true
-		**             the CG_IDS array should be populated with the tokens
-		**             to fetch.
-		** USE_PRICE_TRI_CRYPTO: should we fetch the special Tri Crypto token
-		** 			   price? (require blockchain call)
-		** USE_FEEDBACKS: should we enable the feedback button?
+		** Config over the RPC
 		**********************************************************************/
-		USE_WALLET: true,
-		USE_PRICES: true,
-		USE_PRICE_TRI_CRYPTO: false,
-		CG_IDS: ['ethereum', 'keep3rv1'],
-		TOKENS: [
-			['0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44', 18, 1],
-			['0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44', 18, 1337]
-		],
-		RPC_URL: {1: process.env.RPC_URL_MAINNET},
+		WEB_SOCKET_URL: {
+			1: process.env.WS_URL_MAINNET,
+			250: process.env.WS_URL_FANTOM,
+			42161: process.env.WS_URL_ARBITRUM
+		},
+		JSON_RPC_URL: {
+			1: process.env.RPC_URL_MAINNET,
+			250: process.env.RPC_URL_FANTOM,
+			42161: process.env.RPC_URL_ARBITRUM
+		},
 		ALCHEMY_KEY: process.env.ALCHEMY_KEY,
 		INFURA_KEY: process.env.INFURA_KEY,
 
 		/* 📰 - Keep3r *********************************************************
 		** Keep3r specific stuffs
 		**********************************************************************/
+		BACKEND_URI: 'https://api.keep3r.network', //Only used for stats
 		THE_KEEP3R: '0x0D5Dc686d0a2ABBfDaFDFb4D0533E886517d4E83',
 		KEEP3R_V1_ADDR: '0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44',
 		KEEP3R_V2_ADDR: '0xeb02addcfd8b773a5ffa6b9d1fe99c566f8c44cc',

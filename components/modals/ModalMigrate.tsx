@@ -2,14 +2,13 @@ import	React, {ReactElement}					from	'react';
 import	{useRouter}								from	'next/router';
 import	{ethers}								from	'ethers';
 import	{Contract}								from	'ethcall';
-import	{Button}								from	'@yearn/web-lib/components';
-import	{useWeb3}								from	'@yearn/web-lib/contexts';
+import	{Button, Modal}							from	'@yearn-finance/web-lib/components';
+import	{useWeb3}								from	'@yearn-finance/web-lib/contexts';
 import	{isZeroAddress, toAddress, providers,
-	Transaction, defaultTxStatus}				from	'@yearn/web-lib/utils';
-import	{Cross}									from	'@yearn/web-lib/icons';
+	Transaction, defaultTxStatus}				from	'@yearn-finance/web-lib/utils';
+import	{Cross}									from	'@yearn-finance/web-lib/icons';
 import	useKeep3r								from	'contexts/useKeep3r';
 import	useJob									from	'contexts/useJob';
-import	{Modal}									from	'components/modals/Modal';
 import	Input									from	'components/Input';
 import	KEEP3RV2_ABI							from	'utils/abi/keep3rv2.abi';
 import	{migrateJob}							from	'utils/actions/migrateJob';
@@ -106,10 +105,10 @@ function	ModalMigrate({currentAddress, isOpen, onClose}: TModalMigrate): ReactEl
 		<Modal
 			isOpen={isOpen}
 			onClose={onClose}>
-			<div className={'p-6 space-y-4'}>
-				<div className={'flex justify-between items-center mb-4'}>
+			<div className={'space-y-4 p-6'}>
+				<div className={'mb-4 flex items-center justify-between'}>
 					<h2 className={'text-xl font-bold'}>{'Migrate job'}</h2>
-					<Cross className={'w-6 h-6 text-black cursor-pointer'} onClick={onClose} />
+					<Cross className={'h-6 w-6 cursor-pointer text-black'} onClick={onClose} />
 				</div>
 
 				<div className={'flex flex-col'}>
@@ -129,8 +128,8 @@ function	ModalMigrate({currentAddress, isOpen, onClose}: TModalMigrate): ReactEl
 					</div>
 					<div className={'mb-6 space-y-2'}>
 						<b className={'text-black-1'}>{'Current address'}</b>
-						<div className={'overflow-hidden py-3 px-4 border border-grey-1'}>
-							<p className={'overflow-hidden text-grey-1 text-ellipsis'}>{currentAddress}</p>
+						<div className={'overflow-hidden border border-grey-1 py-3 px-4'}>
+							<p className={'overflow-hidden text-ellipsis text-grey-1'}>{currentAddress}</p>
 						</div>
 					</div>
 					<label
@@ -147,7 +146,7 @@ function	ModalMigrate({currentAddress, isOpen, onClose}: TModalMigrate): ReactEl
 							aria-label={'new address'}
 							placeholder={'0x...'} />
 					</label>
-					<div className={'grid grid-cols-2 gap-4 mt-8'}>
+					<div className={'mt-8 grid grid-cols-2 gap-4'}>
 						<Button
 							onClick={onMigrateJob}
 							isBusy={txStatusMigrate.pending}

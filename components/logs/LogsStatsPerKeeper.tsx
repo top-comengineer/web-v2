@@ -3,8 +3,8 @@ import	React, {ReactElement, ReactNode}				from	'react';
 import	{useTable, usePagination, useSortBy}			from	'react-table';
 import	axios											from	'axios';
 import	Link											from	'next/link';
-import	{Chevron}										from	'@yearn/web-lib/icons';
-import	{format, truncateHex, performBatchedUpdates}	from	'@yearn/web-lib/utils';
+import	{Chevron}										from	'@yearn-finance/web-lib/icons';
+import	{format, truncateHex, performBatchedUpdates}	from	'@yearn-finance/web-lib/utils';
 import	IconLoader										from	'components/icons/IconLoader';
 
 type		TWorkLogs = {
@@ -78,37 +78,37 @@ function	LogsStatsPerKeeper({searchTerm, prices}: TLogs): ReactElement {
 	
 	function	renderPreviousChevron(): ReactElement {
 		if (!canPreviousPage) 
-			return (<Chevron className={'w-4 h-4 opacity-50 cursor-not-allowed'} />);
+			return (<Chevron className={'h-4 w-4 cursor-not-allowed opacity-50'} />);
 		return (
 			<Chevron
-				className={'w-4 h-4 cursor-pointer'}
+				className={'h-4 w-4 cursor-pointer'}
 				onClick={previousPage} />
 		);
 	}
 
 	function	renderNextChevron(): ReactElement {
 		if (!canNextPage) 
-			return (<Chevron className={'w-4 h-4 opacity-50 rotate-180 cursor-not-allowed'} />);
+			return (<Chevron className={'h-4 w-4 rotate-180 cursor-not-allowed opacity-50'} />);
 		return (
 			<Chevron
-				className={'w-4 h-4 rotate-180 cursor-pointer'}
+				className={'h-4 w-4 rotate-180 cursor-pointer'}
 				onClick={nextPage} />
 		);
 	}
 
 	if (!isInit && logs.length === 0) {
 		return (
-			<div className={'flex justify-center items-center h-full min-h-[112px]'}>
-				<IconLoader className={'w-6 h-6 animate-spin'} />
+			<div className={'flex h-full min-h-[112px] items-center justify-center'}>
+				<IconLoader className={'h-6 w-6 animate-spin'} />
 			</div>
 		);
 	}
 
 	return (
-		<div className={'flex overflow-x-scroll flex-col w-full'}>
+		<div className={'flex w-full flex-col overflow-x-scroll'}>
 			<table
 				{...getTableProps()}
-				className={'overflow-x-scroll min-w-full'}>
+				className={'min-w-full overflow-x-scroll'}>
 				<thead>
 					{headerGroups.map((headerGroup: any): ReactElement => (
 						<tr key={headerGroup.getHeaderGroupProps().key} {...headerGroup.getHeaderGroupProps()}>
@@ -129,7 +129,7 @@ function	LogsStatsPerKeeper({searchTerm, prices}: TLogs): ReactElement {
 						prepareRow(row);
 						return (
 							<Link key={row.getRowProps().key} href={`/stats/${row.values.address}`}>
-								<tr {...row.getRowProps()} className={'hover:bg-white transition-colors cursor-pointer'}>
+								<tr {...row.getRowProps()} className={'cursor-pointer transition-colors hover:bg-white'}>
 									{row.cells.map((cell: any): ReactElement => {
 										return (
 											<td
@@ -150,9 +150,9 @@ function	LogsStatsPerKeeper({searchTerm, prices}: TLogs): ReactElement {
 					})}
 				</tbody>
 			</table>
-			{canPreviousPage || canNextPage ? <div className={'flex flex-row justify-end items-center p-4 space-x-2'}>
+			{canPreviousPage || canNextPage ? <div className={'flex flex-row items-center justify-end space-x-2 p-4'}>
 				{renderPreviousChevron()}
-				<p className={'text-sm tabular-nums select-none'}>
+				<p className={'select-none text-sm tabular-nums'}>
 					{`${pageIndex + 1}/${pageOptions.length}`}
 				</p>
 				{renderNextChevron()}

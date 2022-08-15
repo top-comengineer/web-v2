@@ -1,10 +1,9 @@
 import	React, {ReactElement}					from	'react';
-import	{Button}								from	'@yearn/web-lib/components';
-import	{Cross}									from	'@yearn/web-lib/icons';
-import	{format, Transaction, defaultTxStatus}	from	'@yearn/web-lib/utils';
-import	{useWeb3}								from	'@yearn/web-lib/contexts';
+import	{Button, Modal}							from	'@yearn-finance/web-lib/components';
+import	{Cross}									from	'@yearn-finance/web-lib/icons';
+import	{format, Transaction, defaultTxStatus}	from	'@yearn-finance/web-lib/utils';
+import	{useWeb3}								from	'@yearn-finance/web-lib/contexts';
 import	useKeep3r								from	'contexts/useKeep3r';
-import	{Modal}									from	'components/modals/Modal';
 import	Input									from	'components/Input';
 import	TokenDropdown							from	'components/TokenDropdown';
 import	{unbond}								from	'utils/actions/unbond';
@@ -61,13 +60,13 @@ function	ModalUnbond({isOpen, onClose, tokenBonded}: TModalUnbond): ReactElement
 		<Modal
 			isOpen={isOpen}
 			onClose={onClose}>
-			<div className={'p-6 space-y-4'}>
-				<div className={'flex justify-between items-center mb-4'}>
+			<div className={'space-y-4 p-6'}>
+				<div className={'mb-4 flex items-center justify-between'}>
 					<h2 className={'text-xl font-bold'}>{'Unbond'}</h2>
-					<Cross className={'w-6 h-6 text-black cursor-pointer'} onClick={onClose} />
+					<Cross className={'h-6 w-6 cursor-pointer text-black'} onClick={onClose} />
 				</div>
 				
-				<div className={'grid grid-cols-1 gap-4 mb-4 md:grid-cols-2'}>
+				<div className={'mb-4 grid grid-cols-1 gap-4 md:grid-cols-2'}>
 					<div className={'space-y-6'}>
 						<p>
 							{'If you no longer wish to be a keeper you have to call '}
@@ -80,7 +79,7 @@ function	ModalUnbond({isOpen, onClose, tokenBonded}: TModalUnbond): ReactElement
 							{' and claim the assets.'}
 						</p>
 					</div>
-					<div className={'p-6 space-y-10 bg-white'}>
+					<div className={'space-y-10 bg-white p-6'}>
 						<div>
 							<p className={'mb-2'}>{'Balance, KP3R'}</p>
 							<b className={'text-xl'}>{format.toNormalizedAmount(keeperStatus.balanceOf, 18)}</b>
@@ -96,7 +95,7 @@ function	ModalUnbond({isOpen, onClose, tokenBonded}: TModalUnbond): ReactElement
 					</div>
 				</div>
 
-				<div className={'grid grid-cols-2 gap-4 mb-4'}>
+				<div className={'mb-4 grid grid-cols-2 gap-4'}>
 					<div className={'mb-4 space-y-2'}>
 						<b>{'Token'}</b>
 						<TokenDropdown.Fake name={'KP3R'} />
@@ -116,7 +115,7 @@ function	ModalUnbond({isOpen, onClose, tokenBonded}: TModalUnbond): ReactElement
 					</div>
 				</div>
 
-				<div className={'grid grid-cols-2 gap-4 mb-4'}>
+				<div className={'mb-4 grid grid-cols-2 gap-4'}>
 					<div>
 						<Button
 							onClick={onUnbond}
@@ -129,7 +128,7 @@ function	ModalUnbond({isOpen, onClose, tokenBonded}: TModalUnbond): ReactElement
 						<Button
 							onClick={onWithdraw}
 							isBusy={txStatusWithdraw.pending}
-							isDisabled={!keeperStatus.canActivate || keeperStatus.pendingUnbonds.eq(0)}>
+							isDisabled={!keeperStatus.canWithdraw || keeperStatus.pendingUnbonds.eq(0)}>
 							{txStatusWithdraw.error ? 'Transaction failed' : txStatusWithdraw.success ? 'Transaction successful' : keeperStatus.canWithdraw ? 'Withdraw' : `Withdraw (${keeperStatus.canWithdrawIn})`}
 						</Button>
 					</div>

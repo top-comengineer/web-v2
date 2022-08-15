@@ -3,7 +3,7 @@ import	React, {ReactElement}	from	'react';
 function	SectionUnderstandSetup(): ReactElement {
 	return (
 		<section aria-label={'UNDERSTAND SETUP'}>
-			<div className={'grid grid-cols-1 gap-8 w-full md:grid-cols-2'}>
+			<div className={'grid w-full grid-cols-1 gap-8 md:grid-cols-2'}>
 				<div>
 					<h2 className={'text-xl font-bold'}>{'UNDERSTAND SETUP'}</h2>
 					<div className={'mt-4 space-y-6'}>

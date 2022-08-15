@@ -1,7 +1,7 @@
 import	React, {ReactElement}							from	'react';
-import	{Button}										from	'@yearn/web-lib/components';
-import	{isZeroAddress, Transaction, defaultTxStatus}	from	'@yearn/web-lib/utils';
-import	{useWeb3}										from	'@yearn/web-lib/contexts';
+import	{Button}										from	'@yearn-finance/web-lib/components';
+import	{isZeroAddress, Transaction, defaultTxStatus}	from	'@yearn-finance/web-lib/utils';
+import	{useWeb3}										from	'@yearn-finance/web-lib/contexts';
 import	useKeep3r										from	'contexts/useKeep3r';
 import	Input											from	'components/Input';
 import	{revoke}										from	'utils/actions/revoke';
@@ -29,7 +29,7 @@ function	SectionBlacklist(): ReactElement {
 			<h2 className={'text-xl font-bold'}>{'BLACKLIST'}</h2>
 			<div className={'mt-6'}>
 				<div className={'grid grid-cols-5 gap-4'}>
-					<div className={'flex flex-col col-span-3 space-y-2'}>
+					<div className={'col-span-3 flex flex-col space-y-2'}>
 						<span>
 							<b className={'hidden text-black-1 md:block'}>{'Blacklist keeper from network'}</b>
 							<b className={'block text-black-1 md:hidden'}>{'Blacklist keeper'}</b>
@@ -43,7 +43,7 @@ function	SectionBlacklist(): ReactElement {
 								placeholder={'0x...'} />
 						</label>
 					</div>
-					<div className={'flex flex-col col-span-2 space-y-2'}>
+					<div className={'col-span-2 flex flex-col space-y-2'}>
 						<b className={'text-black-1/0'}>{'-'}</b>
 						<Button
 							onClick={onRevoke}

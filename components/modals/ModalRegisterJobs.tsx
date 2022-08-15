@@ -1,10 +1,9 @@
 import	React, {ReactElement}							from	'react';
-import	{Button}										from	'@yearn/web-lib/components';
-import	{Cross}											from	'@yearn/web-lib/icons';
-import	{useWeb3}										from	'@yearn/web-lib/contexts';
-import	{isZeroAddress, Transaction, defaultTxStatus}	from	'@yearn/web-lib/utils';
+import	{Button, Modal}									from	'@yearn-finance/web-lib/components';
+import	{Cross}											from	'@yearn-finance/web-lib/icons';
+import	{useWeb3}										from	'@yearn-finance/web-lib/contexts';
+import	{isZeroAddress, Transaction, defaultTxStatus}	from	'@yearn-finance/web-lib/utils';
 import	useKeep3r										from	'contexts/useKeep3r';
-import	{Modal}											from	'components/modals/Modal';
 import	Input											from	'components/Input';
 import	{registerJob}									from	'utils/actions/registerJob';
 
@@ -40,10 +39,10 @@ function	ModalRegisterJobs({isOpen, onClose}: TModalRegisterJobs): ReactElement 
 		<Modal
 			isOpen={isOpen}
 			onClose={onClose}>
-			<div className={'p-6 space-y-4'}>
-				<div className={'flex justify-between items-center mb-4'}>
+			<div className={'space-y-4 p-6'}>
+				<div className={'mb-4 flex items-center justify-between'}>
 					<h2 className={'text-xl font-bold'}>{'Register job'}</h2>
-					<Cross className={'w-6 h-6 text-black cursor-pointer'} onClick={onClose} />
+					<Cross className={'h-6 w-6 cursor-pointer text-black'} onClick={onClose} />
 				</div>
 				
 				<div className={'pb-6'}>

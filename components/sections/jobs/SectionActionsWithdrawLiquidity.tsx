@@ -1,8 +1,8 @@
 import	React, {ReactElement}					from	'react';
 import	{BigNumber, ethers}						from	'ethers';
-import	{Button}								from	'@yearn/web-lib/components';
-import	{useWeb3}								from	'@yearn/web-lib/contexts';
-import	{format, Transaction, defaultTxStatus}	from	'@yearn/web-lib/utils';
+import	{Button}								from	'@yearn-finance/web-lib/components';
+import	{useWeb3}								from	'@yearn-finance/web-lib/contexts';
+import	{format, Transaction, defaultTxStatus}	from	'@yearn-finance/web-lib/utils';
 import	useJob									from	'contexts/useJob';
 import	usePairs								from	'contexts/usePairs';
 import	Input									from	'components/Input';
@@ -59,11 +59,11 @@ function	PanelUnbondTokens(): ReactElement {
 	}
 
 	return (
-		<div aria-label={'Unbond'} className={'flex flex-col mb-10'}>
+		<div aria-label={'Unbond'} className={'mb-10 flex flex-col'}>
 			<b className={'text-lg'}>{'Unbond'}</b>
 			<div className={'mt-8 space-y-6'}>
 				<div>
-					<div className={'grid grid-cols-1 gap-4 mb-4 md:grid-cols-2'}>
+					<div className={'mb-4 grid grid-cols-1 gap-4 md:grid-cols-2'}>
 						<div className={'space-y-2'}>
 							<TokenPairDropdown name={'kLP-KP3R/WETH'} />
 						</div>
@@ -78,15 +78,15 @@ function	PanelUnbondTokens(): ReactElement {
 						<b>
 							{jobStatus.canWithdraw ? 'Pending unbond' : `Pending unbond (${jobStatus.canWithdrawIn})`}
 						</b>
-						<dl className={'space-y-2 w-full'}>
-							<div className={'flex overflow-hidden relative flex-row justify-between items-center w-full'}>
-								<dt className={'pr-2 text-black-1 whitespace-nowrap bg-white'}>{'kLP-KP3R/WETH'}</dt>
+						<dl className={'w-full space-y-2'}>
+							<div className={'relative flex w-full flex-row items-center justify-between overflow-hidden'}>
+								<dt className={'whitespace-nowrap bg-white pr-2 text-black-1'}>{'kLP-KP3R/WETH'}</dt>
 								<dd className={'w-full font-bold'}>
 									<div className={'absolute bottom-1.5 w-full'}>
 										<Line />
 									</div>
 									<div className={'flex justify-end'}>
-										<p className={'z-10 pl-1 text-right text-black-1 bg-white'}>
+										<p className={'z-10 bg-white pl-1 text-right text-black-1'}>
 											{format.toNormalizedAmount(jobStatus?.pendingUnbonds || 0, 18)}
 										</p>
 									</div>
@@ -195,7 +195,7 @@ function	SectionActionsWithdrawLiquidity(): ReactElement {
 			<b className={'text-lg'}>{'Withdraw and Burn'}</b>
 			<div className={'mt-8 space-y-6'}>
 				<div>
-					<div className={'grid grid-cols-1 gap-4 mb-4 md:grid-cols-2'}>
+					<div className={'mb-4 grid grid-cols-1 gap-4 md:grid-cols-2'}>
 						<div className={'space-y-2'}>
 							<TokenPairDropdown name={'kLP-KP3R/WETH'} />
 						</div>
@@ -208,29 +208,29 @@ function	SectionActionsWithdrawLiquidity(): ReactElement {
 					</div>
 					<div className={'mb-6 space-y-2'}>
 						<b>{'You will receive'}</b>
-						<dl className={'space-y-2 w-full'}>
-							<div className={'flex overflow-hidden relative flex-row justify-between items-center w-full'}>
-								<dt className={'pr-2 text-black-1 whitespace-nowrap bg-white'}>{'KP3R'}</dt>
+						<dl className={'w-full space-y-2'}>
+							<div className={'relative flex w-full flex-row items-center justify-between overflow-hidden'}>
+								<dt className={'whitespace-nowrap bg-white pr-2 text-black-1'}>{'KP3R'}</dt>
 								<dd className={'w-full font-bold'}>
 									<div className={'absolute bottom-1.5 w-full'}>
 										<Line />
 									</div>
 									<div className={'flex justify-end'}>
-										<p className={'z-10 pl-1 text-right text-black-1 bg-white'}>
+										<p className={'z-10 bg-white pl-1 text-right text-black-1'}>
 											{format.toNormalizedAmount(expectedUnderlyingAmount?.token1 || 0, 18)}
 										</p>
 									</div>
 								</dd>
 							</div>
 
-							<div className={'flex overflow-hidden relative flex-row justify-between items-center w-full'}>
-								<dt className={'pr-2 text-black-1 whitespace-nowrap bg-white'}>{'wETH'}</dt>
+							<div className={'relative flex w-full flex-row items-center justify-between overflow-hidden'}>
+								<dt className={'whitespace-nowrap bg-white pr-2 text-black-1'}>{'wETH'}</dt>
 								<dd className={'w-full font-bold'}>
 									<div className={'absolute bottom-1.5 w-full'}>
 										<Line />
 									</div>
 									<div className={'flex justify-end'}>
-										<p className={'z-10 pl-1 text-right text-black-1 bg-white'}>
+										<p className={'z-10 bg-white pl-1 text-right text-black-1'}>
 											{format.toNormalizedAmount(expectedUnderlyingAmount?.token2 || 0, 18)}
 										</p>
 									</div>

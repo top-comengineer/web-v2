@@ -9,7 +9,7 @@ This project is developed with React & NextJs, is using TailwindCSS for the styl
 In order to run the project, a few things will be required.  
 
 #### Github Auth Token
-The project is using the @yearn/web-lib library for basic layout, components, contexts, etc. This package is deployed on GitHub via the Npm registry. In order to install it, a valid GitHub Personal Token should be set on your machine. This token is used to authenticate the requests to the Npm registry. You can follow [this](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-to-github-packages) documentation to install it.  
+The project is using the @yearn-finance/web-lib library for basic layout, components, contexts, etc. This package is deployed on GitHub via the Npm registry. In order to install it, a valid GitHub Personal Token should be set on your machine. This token is used to authenticate the requests to the Npm registry. You can follow [this](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-to-github-packages) documentation to install it.  
 
 #### Installation
 Next step will be to install the dependencies. You need to make sure [Yarn](https://yarnpkg.com/) is installed on your machine and ready to use. Then, run the following command: `yarn`.  

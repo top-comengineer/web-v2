@@ -1,11 +1,11 @@
 import	React, {ReactElement}					from	'react';
 import	{ethers}								from	'ethers';
 import	{Contract}								from	'ethcall';
-import	{Button}								from	'@yearn/web-lib/components';
-import	{useWeb3}								from	'@yearn/web-lib/contexts';
+import	{Button}								from	'@yearn-finance/web-lib/components';
+import	{useWeb3}								from	'@yearn-finance/web-lib/contexts';
 import	{isZeroAddress, providers, format,
 	performBatchedUpdates, Transaction,
-	defaultTxStatus}							from	'@yearn/web-lib/utils';
+	defaultTxStatus}							from	'@yearn-finance/web-lib/utils';
 import	Input									from	'components/Input';
 import	TokenDropdown							from	'components/TokenDropdown';
 import	useKeep3r								from	'contexts/useKeep3r';
@@ -137,7 +137,7 @@ function	SectionAddToken(): ReactElement {
 			<b className={'text-lg'}>{'Add tokens directly'}</b>
 			<div aria-label={'Add tokens directly'} className={'mt-8 mb-10 space-y-6'}>
 				<div>
-					<div className={'grid relative grid-cols-1 gap-4 my-4 md:grid-cols-2'}>
+					<div className={'relative my-4 grid grid-cols-1 gap-4 md:grid-cols-2'}>
 						<div className={'relative space-y-2'}>
 							<TokenDropdown
 								onSelect={(s: string): void => {
@@ -256,7 +256,7 @@ function	SectionActionsManageLiquidity(): ReactElement {
 			<b className={'text-lg'}>{'Withdraw tokens'}</b>
 			<div aria-label={'Withdraw tokens'} className={'mt-8 space-y-6'}>
 				<div>
-					<div className={'grid grid-cols-1 gap-4 my-4 md:grid-cols-2'}>
+					<div className={'my-4 grid grid-cols-1 gap-4 md:grid-cols-2'}>
 						<div className={'space-y-2'}>
 							<TokenDropdown onSelect={(s: string): void => set_tokenToWithdraw(s)} />
 							<p className={'hidden text-xs text-black-1/0 md:block'}>{'-'}</p>

@@ -1,5 +1,5 @@
 import	React, {ReactElement}		from	'react';
-import	{format}					from	'@yearn/web-lib/utils';
+import	{format}					from	'@yearn-finance/web-lib/utils';
 import	useTreasury					from	'contexts/useTreasury';
 import	LogoConvex					from	'components/icons/LogoConvex';
 import	LogoYearn					from	'components/icons/LogoYearn';
@@ -16,7 +16,7 @@ function	Treasury(): ReactElement {
 	return (
 		<>
 			<section aria-label={'general statistics'} className={'mb-6 bg-grey-3'}>
-				<div className={'flex justify-center items-center py-6 px-4 md:px-0'}>
+				<div className={'flex items-center justify-center py-6 px-4 md:px-0'}>
 					<div className={'space-y-2 text-center'}>
 						<p>{'TVL'}</p>
 						<div><b className={'text-2xl'}>
@@ -25,12 +25,12 @@ function	Treasury(): ReactElement {
 					</div>
 				</div> 
 			</section>
-			<main className={'flex flex-col col-span-12 px-4 mx-auto mb-10 w-full max-w-6xl min-h-[100vh]'}>
+			<main className={'col-span-12 mx-auto mb-10 flex min-h-[100vh] w-full max-w-6xl flex-col px-4'}>
 				<div className={'flex flex-col space-y-6'}>
 					{treasury.sort((a, b): number => b.tokenStakedUSD - a.tokenStakedUSD).map((treasure): ReactElement => (
-						<div key={treasure.name} className={'p-6 bg-white'}>
+						<div key={treasure.name} className={'bg-white p-6'}>
 							<p>{'Protocol'}</p>
-							<div className={'flex items-center mt-2 space-x-2'}>
+							<div className={'mt-2 flex items-center space-x-2'}>
 								{
 									treasure.protocol === 'Convex' ?
 										<LogoConvex /> :
@@ -39,7 +39,7 @@ function	Treasury(): ReactElement {
 								}
 								<h3 className={'text-2xl font-bold'}>{treasure.protocol}</h3>
 							</div>
-							<div className={'grid grid-cols-1 gap-4 mt-6 md:grid-cols-3 md:mt-10'}>
+							<div className={'mt-6 grid grid-cols-1 gap-4 md:mt-10 md:grid-cols-3'}>
 								<div>
 									<p>{'Token staked'}</p>
 									<div className={'py-0 md:pt-2 md:pb-1'}><b className={'text-2xl'}>{format.amount(treasure.tokenStaked, 2, 2)}</b></div>

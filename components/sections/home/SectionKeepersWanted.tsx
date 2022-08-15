@@ -1,6 +1,6 @@
 import	React, {ReactElement}	from	'react';
-import	{Button}				from	'@yearn/web-lib/components';
-import	{format}				from	'@yearn/web-lib/utils';
+import	{Button}				from	'@yearn-finance/web-lib/components';
+import	{format}				from	'@yearn-finance/web-lib/utils';
 import	Line					from	'components/Line';
 import	TokenDropdown			from	'components/TokenDropdown';
 import	{ModalBond}				from	'components/modals/ModalBond';
@@ -23,43 +23,43 @@ function	SectionKeepersWanted(): ReactElement {
 			<TokenDropdown.Fake name={'KP3R'} />
 
 			<div className={'my-4'}>
-				<dl className={'space-y-4 w-full'}>
-					<div className={'flex overflow-hidden relative flex-row justify-between items-center w-full'}>
-						<dt className={'pr-2 whitespace-nowrap bg-grey-5'}>{'Balance'}</dt>
+				<dl className={'w-full space-y-4'}>
+					<div className={'relative flex w-full flex-row items-center justify-between overflow-hidden'}>
+						<dt className={'whitespace-nowrap bg-grey-5 pr-2'}>{'Balance'}</dt>
 						<dd className={'w-full font-bold'}>
 							<div className={'absolute bottom-1.5 -z-10 w-full'}>
 								<Line />
 							</div>
 							<div className={'flex justify-end'}>
-								<p className={'pl-1 text-right bg-grey-5'}>
+								<p className={'bg-grey-5 pl-1 text-right'}>
 									{`${format.toNormalizedAmount(keeperStatus?.balanceOf, 18)} KP3R`}
 								</p>
 							</div>
 						</dd>
 					</div>
 
-					<div className={'flex overflow-hidden relative flex-row justify-between items-center w-full'}>
-						<dt className={'pr-2 whitespace-nowrap bg-grey-5'}>{'Bonds'}</dt>
+					<div className={'relative flex w-full flex-row items-center justify-between overflow-hidden'}>
+						<dt className={'whitespace-nowrap bg-grey-5 pr-2'}>{'Bonds'}</dt>
 						<dd className={'w-full font-bold'}>
 							<div className={'absolute bottom-1.5 -z-10 w-full'}>
 								<Line />
 							</div>
 							<div className={'flex justify-end'}>
-								<p className={'pl-1 text-right bg-grey-5'}>
+								<p className={'bg-grey-5 pl-1 text-right'}>
 									{`${format.toNormalizedAmount(keeperStatus.bonds, 18)} KP3R`}
 								</p>
 							</div>
 						</dd>
 					</div>
 
-					<div className={'flex overflow-hidden relative flex-row justify-between items-center w-full'}>
-						<dt className={'pr-2 whitespace-nowrap bg-grey-5'}>{'Work Completed'}</dt>
+					<div className={'relative flex w-full flex-row items-center justify-between overflow-hidden'}>
+						<dt className={'whitespace-nowrap bg-grey-5 pr-2'}>{'Work Completed'}</dt>
 						<dd className={'w-full font-bold'}>
 							<div className={'absolute bottom-1.5 -z-10 w-full'}>
 								<Line />
 							</div>
 							<div className={'flex justify-end'}>
-								<p className={'pl-1 text-right bg-grey-5'}>{'0'}</p>
+								<p className={'bg-grey-5 pl-1 text-right'}>{'0'}</p>
 							</div>
 						</dd>
 					</div>
@@ -67,7 +67,7 @@ function	SectionKeepersWanted(): ReactElement {
 			</div>
 
 			<div className={'mb-10'}>
-				<div className={'grid grid-cols-2 gap-2 w-full'}>
+				<div className={'grid w-full grid-cols-2 gap-2'}>
 					<Button onClick={(): void => set_isModalBondOpen(true)}>{'Bond'}</Button>
 					<Button onClick={(): void => set_isModalUnBondOpen(true)}>{'Unbond'}</Button>
 				</div>

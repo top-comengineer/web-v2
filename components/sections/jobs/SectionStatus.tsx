@@ -1,15 +1,15 @@
 import	React, {ReactElement}					from	'react';
-import	{Copy, LinkOut}							from	'@yearn/web-lib/icons';
-import	{format, truncateHex, copyToClipboard}	from	'@yearn/web-lib/utils';
+import	{Copy, LinkOut}							from	'@yearn-finance/web-lib/icons';
+import	{format, truncateHex, copyToClipboard}	from	'@yearn-finance/web-lib/utils';
 import	useJob									from	'contexts/useJob';
-import	{usePrices}								from	'@yearn/web-lib';
+import	usePrices								from	'contexts/usePrices';
 
 function	SectionStatus(): ReactElement {
 	const	{jobStatus} = useJob();
 	const	{prices} = usePrices();
 
 	return (
-		<div className={'flex flex-col p-6 space-y-6 bg-white'}>
+		<div className={'flex flex-col space-y-6 bg-white p-6'}>
 			<b className={'text-xl'}>{'STATUS'}</b>
 			<div className={'space-y-2'}>
 				<b>{'Credits'}</b>
@@ -119,10 +119,10 @@ function	SectionStatus(): ReactElement {
 						<dt className={'w-1/2'}>{'Owner'}</dt>
 						<dd className={'flex flex-row items-center space-x-2'}>
 							<b>{truncateHex(jobStatus.jobOwner, 5)}</b>
-							<div><Copy onClick={(): void => copyToClipboard(jobStatus.jobOwner)} className={'w-6 h-6 text-black cursor-pointer'} /></div>
+							<div><Copy onClick={(): void => copyToClipboard(jobStatus.jobOwner)} className={'h-6 w-6 cursor-pointer text-black'} /></div>
 							<div>
 								<a href={`https://etherscan.io/address/${jobStatus.jobOwner}`} target={'_blank'} rel={'noopener noreferrer'}>
-									<LinkOut className={'w-6 h-6 text-black cursor-pointer'} />
+									<LinkOut className={'h-6 w-6 cursor-pointer text-black'} />
 								</a>
 							</div>
 						</dd>

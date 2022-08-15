@@ -1,8 +1,8 @@
 import	React, {ReactElement, useContext, createContext}		from	'react';
 import	{Contract}												from	'ethcall';
 import	{request}												from	'graphql-request';
-import	{useWeb3}												from	'@yearn/web-lib/contexts';
-import	{toAddress, providers, performBatchedUpdates, format}	from	'@yearn/web-lib/utils';
+import	{useWeb3}												from	'@yearn-finance/web-lib/contexts';
+import	{toAddress, providers, performBatchedUpdates, format}	from	'@yearn-finance/web-lib/utils';
 import	KEEP3RV1_ABI											from	'utils/abi/keep3rv1.abi';
 import	UNI_V3_PAIR_ABI											from	'utils/abi/univ3Pair.abi';
 import 	{BigNumber, ethers}										from	'ethers';
