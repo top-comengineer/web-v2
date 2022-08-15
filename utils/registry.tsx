@@ -24,7 +24,7 @@ const	REGISTRY: TRegistry = {
 		'name':'YearnTendV2',
 		'repository':'https://github.com/yearn/keep3r-cli-jobs'
 	},
-	'0x133A4273589c2eE5F9Fe28898B68aC1B4B1BA9B0': {
+	'0x656027367B5e27dC21984B546e64dC24dBFaA187': {
 		'name':'PhutureRebalancing',
 		'repository':'https://github.com/Phuture-Finance/keep3r-cli-job-phuture'
 	}
