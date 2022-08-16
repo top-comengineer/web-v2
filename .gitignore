@@ -1,7 +1,8 @@
 .DS_Store
+.hypothesis
 node_modules
 /dist
-
+tsconfig.tsbuildinfo
 
 # local env files
 .env.local
@@ -25,3 +26,6 @@ pnpm-debug.log*
 .env
 .next
 .vercel
+
+public/sw*
+public/workbox-*

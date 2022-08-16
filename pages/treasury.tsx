@@ -27,48 +27,53 @@ function	Treasury(): ReactElement {
 			</section>
 			<main className={'col-span-12 mx-auto mb-10 flex min-h-[100vh] w-full max-w-6xl flex-col px-4'}>
 				<div className={'flex flex-col space-y-6'}>
-					{treasury.sort((a, b): number => b.tokenStakedUSD - a.tokenStakedUSD).map((treasure): ReactElement => (
-						<div key={treasure.name} className={'bg-white p-6'}>
-							<p>{'Protocol'}</p>
-							<div className={'mt-2 flex items-center space-x-2'}>
-								{
-									treasure.protocol === 'Convex' ?
-										<LogoConvex /> :
-										treasure.protocol === 'Yearn' ?
-											<LogoYearn /> : <div />
-								}
-								<h3 className={'text-2xl font-bold'}>{treasure.protocol}</h3>
-							</div>
-							<div className={'mt-6 grid grid-cols-1 gap-4 md:mt-10 md:grid-cols-3'}>
-								<div>
-									<p>{'Token staked'}</p>
-									<div className={'py-0 md:pt-2 md:pb-1'}><b className={'text-2xl'}>{format.amount(treasure.tokenStaked, 2, 2)}</b></div>
-									<p className={'text-xs'}>{treasure.name}</p>
-								</div>
-
-								<div>
-									<p>{'Token staked, $'}</p>
-									<div className={'py-0 md:pt-2 md:pb-1'}><b className={'text-2xl'}>{treasure.name.startsWith('ib') ? '-' : format.amount(treasure.tokenStakedUSD, 2, 2)}</b></div>
-								</div>
-
-								{treasure.hasNoRewards ? 
-									<div /> :
-									<>
-										{/* <div>
-											<p>{'Unclaimed rewards'}</p>
-											<div className={'py-0 md:pt-2 md:pb-1'}><b className={'text-2xl'}>{format.amount(treasure.unclaimedRewards, 2, 2)}</b></div>
-											<p className={'text-xs'}>{treasure.rewards}</p>
-										</div> */}
+					{
+						treasury
+							.filter((t): boolean => t.tokenStakedUSD > 0)
+							.sort((a, b): number => b.tokenStakedUSD - a.tokenStakedUSD)
+							.map((treasure): ReactElement => (
+								<div key={treasure.name} className={'bg-white p-6'}>
+									<p>{'Protocol'}</p>
+									<div className={'mt-2 flex items-center space-x-2'}>
+										{
+											treasure.protocol === 'Convex' ?
+												<LogoConvex /> :
+												treasure.protocol === 'Yearn' ?
+													<LogoYearn /> : <div />
+										}
+										<h3 className={'text-2xl font-bold'}>{treasure.protocol}</h3>
+									</div>
+									<div className={'mt-6 grid grid-cols-1 gap-4 md:mt-10 md:grid-cols-3'}>
+										<div>
+											<p>{'Token staked'}</p>
+											<div className={'py-0 md:pt-2 md:pb-1'}>
+												<b className={'text-2xl'}>{format.amount(treasure.tokenStaked, 2, 2)}</b>
+											</div>
+											<p className={'text-xs'}>{treasure.name}</p>
+										</div>
 
 										<div>
-											<p>{'Unclaimed rewards, $'}</p>
-											<div className={'py-0 md:pt-2 md:pb-1'}><b className={'text-2xl'}>{format.amount(treasure.unclaimedRewardsUSD, 2, 2)}</b></div>
+											<p>{'Token staked, $'}</p>
+											<div className={'py-0 md:pt-2 md:pb-1'}>
+												<b className={'text-2xl'}>
+													{format.amount(treasure.tokenStakedUSD, 2, 2)}
+												</b>
+											</div>
 										</div>
-									</>
-								}
-							</div>
-						</div>
-					))}
+
+										{treasure.hasNoRewards ? 
+											<div /> :
+											<>
+												<div>
+													<p>{'Unclaimed rewards, $'}</p>
+													<div className={'py-0 md:pt-2 md:pb-1'}><b className={'text-2xl'}>{format.amount(treasure.unclaimedRewardsUSD, 2, 2)}</b></div>
+												</div>
+											</>
+										}
+									</div>
+								</div>
+							))
+					}
 				</div>
 			</main>
 		</>
