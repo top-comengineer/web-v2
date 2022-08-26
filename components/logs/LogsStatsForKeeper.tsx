@@ -6,6 +6,7 @@ import	axios										from	'axios';
 import	{Chevron, LinkOut}							from	'@yearn-finance/web-lib/icons';
 import	{format, performBatchedUpdates, toAddress}	from	'@yearn-finance/web-lib/utils';
 import	IconLoader									from	'components/icons/IconLoader';
+import	IconChevronFilled							from	'components/icons/IconChevronFilled';
 import	REGISTRY									from	'utils/registry';
 
 type		TWorkLogs = {
@@ -48,10 +49,10 @@ function	LogsStatsForKeeper({keeperAddress, prices, searchTerm}: TWorkLogs): Rea
 			)).map((log): unknown => ({
 				date: format.date(Number(log.time) * 1000, true),
 				jobName: REGISTRY[toAddress(log.job)]?.name || 'Unverified Job',
-				earnedKp3r: format.toNormalizedAmount(log.earned, 18),
-				earnedUsd: format.amount(format.toNormalizedValue(log.earned, 18) * (prices.keep3rv1), 2, 2),
-				fees: format.toNormalizedAmount(log.fees, 18),
-				gweiPerCall: format.toNormalizedAmount(log.gwei, 9),
+				earnedKp3r: format.toNormalizedValue(log.earned, 18),
+				earnedUsd: format.toNormalizedValue(log.earned, 18) * (prices.keep3rv1),
+				fees: format.toNormalizedValue(log.fees, 18),
+				gweiPerCall: format.toNormalizedValue(log.gwei, 9),
 				linkOut: log.job
 			}))
 	), [logs, prices.keep3rv1, searchTerm]);
@@ -59,22 +60,37 @@ function	LogsStatsForKeeper({keeperAddress, prices, searchTerm}: TWorkLogs): Rea
 	const columns = React.useMemo((): unknown[] => [
 		{Header: 'Date', accessor: 'date', className: 'pr-8'},
 		{Header: 'Job name', accessor: 'jobName', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'Earned, KP3R', accessor: 'earnedKp3r', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'Earned, $', accessor: 'earnedUsd', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'TX fees, ETH', accessor: 'fees', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'GWEI per call', accessor: 'gweiPerCall', className: 'cell-end pr-6', sortType: 'basic'},
-		{Header: '', accessor: 'linkOut', className: 'cell-end', Cell: ({value}: {value: string}): ReactNode => (
-			<div
-				role={'button'}
-				onClick={(event: any): void => {
-					event.stopPropagation();
-					window.open(`https://etherscan.io/address/${value}`, '_blank');
-				}}>
-				<a href={`https://etherscan.io/address/${value}`} target={'_blank'} rel={'noopener noreferrer'}>
-					<LinkOut className={'h-6 w-6 cursor-pointer text-black'} />
-				</a>
-			</div>
-		)}
+		{
+			Header: 'Earned, KP3R', accessor: 'earnedKp3r', className: 'cell-end pr-8', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 6)
+		},
+		{
+			Header: 'Earned, $', accessor: 'earnedUsd', className: 'cell-end pr-8', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 2, 2)
+		},
+		{
+			Header: 'TX fees, ETH', accessor: 'fees', className: 'cell-end pr-8', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 6)
+		},
+		{
+			Header: 'GWEI per call', accessor: 'gweiPerCall', className: 'cell-end pr-6', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 6)
+		},
+		{
+			Header: '', accessor: 'linkOut', className: 'cell-end', disableSortBy: true,
+			Cell: ({value}: {value: string}): ReactNode => (
+				<div
+					role={'button'}
+					onClick={(event: any): void => {
+						event.stopPropagation();
+						window.open(`https://etherscan.io/address/${value}`, '_blank');
+					}}>
+					<a href={`https://etherscan.io/address/${value}`} target={'_blank'} rel={'noopener noreferrer'}>
+						<LinkOut className={'h-6 w-6 cursor-pointer text-black'} />
+					</a>
+				</div>
+			)
+		}
 	], []);
 
 	const {
@@ -131,9 +147,18 @@ function	LogsStatsForKeeper({keeperAddress, prices, searchTerm}: TWorkLogs): Rea
 								<th
 									key={column.getHeaderProps().key}
 									{...column.getHeaderProps(column.getSortByToggleProps([{
-										className: `pt-2 pb-8 text-left text-base font-bold whitespace-pre ${column.className}`
+										className: 'pt-2 pb-8 text-left text-base font-bold whitespace-pre'
 									}]))}>
-									{column.render('Header')}
+									<div className={`flex flex-row items-center ${column.className}`}>
+										{column.render('Header')}
+										{column.canSort ? <div className={'ml-1'}>
+											{column.isSorted
+												? column.isSortedDesc
+													? <IconChevronFilled className={'h-4 w-4 cursor-pointer text-neutral-500'} />
+													: <IconChevronFilled className={'h-4 w-4 rotate-180 cursor-pointer text-neutral-500'} />
+												: <IconChevronFilled className={'h-4 w-4 cursor-pointer text-neutral-300 transition-colors hover:text-neutral-500'} />}
+										</div> : null}
+									</div>
 								</th>
 							))}
 						</tr>

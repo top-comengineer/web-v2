@@ -6,6 +6,7 @@ import	Link											from	'next/link';
 import	{Chevron}										from	'@yearn-finance/web-lib/icons';
 import	{format, truncateHex, performBatchedUpdates}	from	'@yearn-finance/web-lib/utils';
 import	IconLoader										from	'components/icons/IconLoader';
+import	IconChevronFilled								from	'components/icons/IconChevronFilled';
 
 type		TWorkLogs = {
 	keeper: string,
@@ -41,25 +42,46 @@ function	LogsStatsPerKeeper({searchTerm, prices}: TLogs): ReactElement {
 			.filter((log): boolean => log.keeper?.includes(searchTerm))
 			.map((log): unknown => ({
 				address: log.keeper,
-				earnedKp3r: format.amount(Number(log.earned), 2, 2),
-				earnedUsd: format.amount(Number(log.earned) * (prices.keep3rv1), 2, 2),
-				fees: format.amount(Number(log.fees) * (prices.ethereum), 2, 2),
-				netEarned: format.amount(Number(log.earned) * (prices.keep3rv1) - Number(log.fees) * (prices.ethereum), 2, 2),
+				earnedKp3r: Number(log.earned),
+				earnedUsd: Number(log.earned) * (prices.keep3rv1),
+				fees: Number(log.fees) * (prices.ethereum),
+				netEarned: Number(log.earned) * (prices.keep3rv1) - Number(log.fees) * (prices.ethereum),
 				calls: log.workDone,
-				kp3rPerCall: format.amount(Number(log.earned) / log.workDone, 2, 2),
-				gweiPerCall: format.amount(Number(log.gwei) / log.workDone, 2, 2)
+				kp3rPerCall: Number(log.earned) / log.workDone,
+				gweiPerCall: Number(log.gwei) / log.workDone
 			}))
 	), [logs, prices.ethereum, prices.keep3rv1, searchTerm]);
 		
 	const columns = React.useMemo((): unknown[] => [
 		{Header: 'Keeper', accessor: 'address', className: 'pr-8', Cell: ({value}: {value: string}): ReactNode => truncateHex(value, 5)},
-		{Header: 'Earned, KP3R', accessor: 'earnedKp3r', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'Earned, $', accessor: 'earnedUsd', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'TX fees, $', accessor: 'fees', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'Net earned, $', accessor: 'netEarned', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'Calls', accessor: 'calls', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'KP3R per call ', accessor: 'kp3rPerCall', className: 'cell-end pr-8', sortType: 'basic'},
-		{Header: 'GWEI per call', accessor: 'gweiPerCall', className: 'cell-end', sortType: 'basic'}
+		{
+			Header: 'Earned, KP3R', accessor: 'earnedKp3r', className: 'cell-end pr-8', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 2, 2)
+		},
+		{
+			Header: 'Earned, $', accessor: 'earnedUsd', className: 'cell-end pr-8', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 2, 2)
+		},
+		{
+			Header: 'TX fees, $', accessor: 'fees', className: 'cell-end pr-8', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 2, 2)
+		},
+		{
+			Header: 'Net earned, $', accessor: 'netEarned', className: 'cell-end pr-8', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 2, 2)
+		},
+		{
+			Header: 'Calls', accessor: 'calls', className: 'cell-end pr-8', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 0, 0)
+		},
+		{
+			Header: 'KP3R per call ', accessor: 'kp3rPerCall', className: 'cell-end pr-8', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 2, 2)
+		},
+		{
+			Header: 'GWEI per call', accessor: 'gweiPerCall', className: 'cell-end', sortType: 'basic',
+			Cell: ({value}: {value: number}): ReactNode => format.amount(value, 2, 2)
+		}
 	], []);
 
 	const {
@@ -116,9 +138,18 @@ function	LogsStatsPerKeeper({searchTerm, prices}: TLogs): ReactElement {
 								<th
 									key={column.getHeaderProps().key}
 									{...column.getHeaderProps(column.getSortByToggleProps([{
-										className: `pt-2 pb-8 text-left text-base font-bold whitespace-pre ${column.className}`
+										className: 'pt-2 pb-8 text-left text-base font-bold whitespace-pre'
 									}]))}>
-									{column.render('Header')}
+									<div className={`flex flex-row items-center ${column.className}`}>
+										{column.render('Header')}
+										{column.canSort ? <div className={'ml-1'}>
+											{column.isSorted
+												? column.isSortedDesc
+													? <IconChevronFilled className={'h-4 w-4 cursor-pointer text-neutral-500'} />
+													: <IconChevronFilled className={'h-4 w-4 rotate-180 cursor-pointer text-neutral-500'} />
+												: <IconChevronFilled className={'h-4 w-4 cursor-pointer text-neutral-300 transition-colors hover:text-neutral-500'} />}
+										</div> : null}
+									</div>
 								</th>
 							))}
 						</tr>
