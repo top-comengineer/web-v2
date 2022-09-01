@@ -66,6 +66,9 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 		const	ibkrwSkrwExtraRewards1Contract = new Contract('0xE3A64E08EEbf38b19a3d9fec51d8cD5A8898Dd5e', CONVEX_REWARDS_ABI); // KP3R
 		const	ibkrwSkrwExtraRewards2Contract = new Contract('0x93649cd43635bC5F7Ad8fA2fa27CB9aE765Ec58A', CONVEX_REWARDS_ABI); // CVX
 
+		const	cvxcrvCrvContract = new Contract('0x3Fe65692bfCD0e6CF84cB1E7d24108E434A7587e', CONVEX_REWARDS_ABI); // cvxCRV+CRV
+		const	cvxcrvCrvExtraRewards1Contract = new Contract('0x7091dbb7fcbA54569eF1387Ac89Eb2a5C9F6d2EA', CONVEX_REWARDS_ABI); // 3CRV
+
 		const	kp3rEthContract = new Contract('0x0c2da920E577960f39991030CfBdd4cF0a0CfEBD', CONVEX_REWARDS_ABI);
 		const	mim3CrvContract = new Contract('0xFd5AbF66b003881b88567EB9Ed9c651F14Dc4771', CONVEX_REWARDS_ABI);
 		const	yvEthContract = new Contract('0xa258C4606Ca8206D8aA700cE2143D7db854D168c', YEARN_VAULT_ABI);
@@ -80,6 +83,7 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 			lensPriceContract.getPriceUsdcRecommended('0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B'), //CVX
 			lensPriceContract.getPriceUsdcRecommended('0xd533a949740bb3306d119cc777fa900ba034cd52'), //CRV
 			lensPriceContract.getPriceUsdcRecommended('0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44'), //KP3R
+			lensPriceContract.getPriceUsdcRecommended('0x6c3F90f043a72FA612cbac8115EE7e52BDe6E490'), //3CRV
 
 			ibaudUsdcContract.balanceOf(process.env.THE_KEEP3R as string),
 			ibaudUsdcContract.earned(process.env.THE_KEEP3R as string),
@@ -162,6 +166,11 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 			ibkrwSkrwExtraRewards2Contract.earned(process.env.THE_KEEP3R as string),
 			lensPriceContract.getPriceUsdcRecommended('0x8461A004b50d321CB22B7d034969cE6803911899'),
 
+			cvxcrvCrvContract.balanceOf(process.env.THE_KEEP3R as string), // cvxCRV+CRV
+			cvxcrvCrvContract.earned(process.env.THE_KEEP3R as string),
+			cvxcrvCrvExtraRewards1Contract.earned(process.env.THE_KEEP3R as string),
+			lensPriceContract.getPriceUsdcRecommended('0x9D0464996170c6B9e75eED71c68B99dDEDf279e8'),
+
 			yvEthContract.balanceOf(process.env.THE_KEEP3R as string),
 			lensPriceContract.getPriceUsdcRecommended('0xa258C4606Ca8206D8aA700cE2143D7db854D168c'),
 			yvEthContract.pricePerShare(),
@@ -179,6 +188,7 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 		const	cvxPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
 		const	crvPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
 		const	kp3rPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
+		const	threeCRVPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
 
 		// ibAUD //
 		const	ibAUDStacked = format.units(resultsJobsCall[rIndex++] as BigNumber, 18);
@@ -512,6 +522,27 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 				Number(format.units(ibKRWsKRWExtra2Earned, 18)) * Number(cvxPrice)
 				+
 				Number(format.units(ibKRWsKRWEarned.mul(reduction).div(cvxTotalCliffs), 18)) * Number(cvxPrice)
+			)
+		});
+
+		// cvxCRV+CRV
+		const	cvxCRVCRVStacked = format.units(resultsJobsCall[rIndex++] as BigNumber, 18);
+		const	cvxCRVCRVEarned = resultsJobsCall[rIndex++] as BigNumber;
+		const	cvxCRVCRVExtra1Earned = resultsJobsCall[rIndex++] as BigNumber;
+		const	cvxCRVCRVPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
+		_treasury.push({
+			name: 'cvxCRV + CRV',
+			protocol: 'Convex',
+			rewards: 'CVX',
+			tokenStaked: Number(cvxCRVCRVStacked),
+			tokenStakedUSD: Number(cvxCRVCRVStacked) * Number(cvxCRVCRVPrice),
+			unclaimedRewards: Number(cvxCRVCRVEarned),
+			unclaimedRewardsUSD: (
+				Number(format.units(cvxCRVCRVEarned, 18)) * Number(crvPrice)
+				+
+				Number(format.units(cvxCRVCRVExtra1Earned, 18)) * Number(threeCRVPrice)
+				+
+				Number(format.units(cvxCRVCRVEarned.mul(reduction).div(cvxTotalCliffs), 18)) * Number(cvxPrice)
 			)
 		});
 
