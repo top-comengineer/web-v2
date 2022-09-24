@@ -51,10 +51,10 @@ function	LogsStatsForKeeper({keeperAddress, searchTerm}: TWorkLogs): ReactElemen
 			.map((log): unknown => ({
 				date: format.date(Number(log.time) * 1000, true),
 				jobName: REGISTRY[toAddress(log.job)]?.name || 'Unverified Job',
-				earnedKp3r: format.toNormalizedAmount(log.earned, 18),
-				earnedUsd: format.amount(format.toNormalizedValue(log.earned, 18) * (Number(log.normalizedKp3rPrice)), 2, 2),
-				fees: format.toNormalizedAmount(log.fees, 18),
-				gweiPerCall: format.toNormalizedAmount(log.gwei, 9),
+				earnedKp3r: format.toNormalizedValue(log.earned, 18),
+				earnedUsd: format.toNormalizedValue(log.earned, 18),
+				fees: format.toNormalizedValue(log.fees, 18),
+				gweiPerCall: format.toNormalizedValue(log.gwei, 9),
 				linkOut: log.job
 			}))
 	), [logs, searchTerm]);

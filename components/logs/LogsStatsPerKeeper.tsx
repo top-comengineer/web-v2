@@ -10,6 +10,7 @@ import	IconChevronFilled								from	'components/icons/IconChevronFilled';
 
 type		TWorkLogs = {
 	keeper: string,
+	earnedUnit: string,
 	earned: string,
 	fees: string,
 	gwei: string,
@@ -43,14 +44,10 @@ function	LogsStatsPerKeeper({searchTerm}: TLogs): ReactElement {
 			.filter((log): boolean => log.keeper?.includes(searchTerm))
 			.map((log): unknown => ({
 				address: log.keeper,
-				earnedKp3r: format.amount(Number(log.earned), 2, 2),
-				earnedUsd: format.amount(Number(log.earned), 2, 2),
-				fees: format.amount(Number(log.fees), 2, 2),
-				netEarned: format.amount(
-					parseFloat(log.earned) - parseFloat(log.fees),
-					2,
-					2
-				),
+				earnedKp3r: Number(log.earnedUnit),
+				earnedUsd: Number(log.earned),
+				fees: Number(log.fees),
+				netEarned: Number(log.earned) - Number(log.fees),
 				calls: log.workDone,
 				kp3rPerCall: Number(log.earned) / log.workDone,
 				gweiPerCall: Number(log.gwei) / log.workDone
