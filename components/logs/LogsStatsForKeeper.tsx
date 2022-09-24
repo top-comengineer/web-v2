@@ -24,9 +24,10 @@ type		TLogs = {
 	keeper: string,
 	earned: string,
 	fees: string,
-	gwei: string
+	gwei: string,
+	normalizedKp3rPrice: number
 }
-function	LogsStatsForKeeper({keeperAddress, prices, searchTerm}: TWorkLogs): ReactElement {
+function	LogsStatsForKeeper({keeperAddress, searchTerm}: TWorkLogs): ReactElement {
 	const	[isInit, set_isInit] = React.useState(false);
 	const	[logs, set_logs] = React.useState<TLogs[]>([]);
 
@@ -46,17 +47,18 @@ function	LogsStatsForKeeper({keeperAddress, prices, searchTerm}: TWorkLogs): Rea
 			.filter((log): boolean => (
 				(log.job).toLowerCase()?.includes(searchTerm.toLowerCase())
 				|| (REGISTRY[toAddress(log.job)]?.name || '').toLowerCase()?.includes(searchTerm.toLowerCase())
-			)).map((log): unknown => ({
+			))
+			.map((log): unknown => ({
 				date: format.date(Number(log.time) * 1000, true),
 				jobName: REGISTRY[toAddress(log.job)]?.name || 'Unverified Job',
-				earnedKp3r: format.toNormalizedValue(log.earned, 18),
-				earnedUsd: format.toNormalizedValue(log.earned, 18) * (prices.keep3rv1),
-				fees: format.toNormalizedValue(log.fees, 18),
-				gweiPerCall: format.toNormalizedValue(log.gwei, 9),
+				earnedKp3r: format.toNormalizedAmount(log.earned, 18),
+				earnedUsd: format.amount(format.toNormalizedValue(log.earned, 18) * (Number(log.normalizedKp3rPrice)), 2, 2),
+				fees: format.toNormalizedAmount(log.fees, 18),
+				gweiPerCall: format.toNormalizedAmount(log.gwei, 9),
 				linkOut: log.job
 			}))
-	), [logs, prices.keep3rv1, searchTerm]);
-		
+	), [logs, searchTerm]);
+
 	const columns = React.useMemo((): unknown[] => [
 		{Header: 'Date', accessor: 'date', className: 'pr-8'},
 		{Header: 'Job name', accessor: 'jobName', className: 'cell-end pr-8', sortType: 'basic'},
@@ -127,7 +129,8 @@ function	LogsStatsForKeeper({keeperAddress, prices, searchTerm}: TWorkLogs): Rea
 		);
 	}
 
-	if (!isInit && logs.length === 0) {
+	
+	if (!isInit || logs.length === 0) {
 		return (
 			<div className={'flex h-full min-h-[112px] items-center justify-center'}>
 				<IconLoader className={'h-6 w-6 animate-spin'} />

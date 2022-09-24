@@ -22,7 +22,7 @@ type		TLogs = {
 		keep3rv1: number
 	}
 }
-function	LogsStatsPerKeeper({searchTerm, prices}: TLogs): ReactElement {
+function	LogsStatsPerKeeper({searchTerm}: TLogs): ReactElement {
 	const	[isInit, set_isInit] = React.useState(false);
 	const	[logs, set_logs] = React.useState<TWorkLogs[]>([]);
 
@@ -37,20 +37,25 @@ function	LogsStatsPerKeeper({searchTerm, prices}: TLogs): ReactElement {
 			.catch((): void => set_isInit(true));
 	}, []);
 
+	console.log(logs);
 	const data = React.useMemo((): unknown[] => (
 		logs
 			.filter((log): boolean => log.keeper?.includes(searchTerm))
 			.map((log): unknown => ({
 				address: log.keeper,
-				earnedKp3r: Number(log.earned),
-				earnedUsd: Number(log.earned) * (prices.keep3rv1),
-				fees: Number(log.fees) * (prices.ethereum),
-				netEarned: Number(log.earned) * (prices.keep3rv1) - Number(log.fees) * (prices.ethereum),
+				earnedKp3r: format.amount(Number(log.earned), 2, 2),
+				earnedUsd: format.amount(Number(log.earned), 2, 2),
+				fees: format.amount(Number(log.fees), 2, 2),
+				netEarned: format.amount(
+					parseFloat(log.earned) - parseFloat(log.fees),
+					2,
+					2
+				),
 				calls: log.workDone,
 				kp3rPerCall: Number(log.earned) / log.workDone,
 				gweiPerCall: Number(log.gwei) / log.workDone
 			}))
-	), [logs, prices.ethereum, prices.keep3rv1, searchTerm]);
+	), [logs, searchTerm]);
 		
 	const columns = React.useMemo((): unknown[] => [
 		{Header: 'Keeper', accessor: 'address', className: 'pr-8', Cell: ({value}: {value: string}): ReactNode => truncateHex(value, 5)},

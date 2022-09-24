@@ -37,20 +37,20 @@ function	StatsKeeper({stats, prices}: TStatsAddress): ReactElement {
 				<div className={'flex flex-col space-y-2 bg-white p-6'}>
 					<p>{'Earned, KP3R'}</p>
 					<div><b className={'text-xl'}>{!stats.isSuccessful ? '-' : format.amount(Number(stats.earned), 2, 2)}</b></div>
-					<p className={'text-xs'}>{`Earned, $: ${!stats.isSuccessful ? '-' : format.amount(Number(stats.earned) * prices.keep3rv1, 2, 2)}`}</p>
+					<p className={'text-xs'}>{`Earned, $: ${!stats.isSuccessful ? '-' : format.amount(Number(stats.earned), 2, 2)}`}</p>
 				</div>
 
 				<div className={'flex flex-col space-y-2 bg-white p-6'}>
 					<p>{'TX fees, ETH'}</p>
 					<div><b className={'text-xl'}>{!stats.isSuccessful ? '-' : format.amount(Number(stats.fees), 2, 2)}</b></div>
-					<p className={'text-xs'}>{`TX fees, $: ${!stats.isSuccessful ? '-' : format.amount(Number(stats.fees) * (prices.ethereum), 2, 2)}`}</p>
+					<p className={'text-xs'}>{`TX fees, $: ${!stats.isSuccessful ? '-' : format.amount(Number(stats.fees), 2, 2)}`}</p>
 				</div>
 
 				<div className={'flex flex-col space-y-2 bg-white p-6'}>
 					<p>{'Net earnings, $'}</p>
 					<div>
 						<b className={'text-xl'}>
-							{!stats.isSuccessful ? '-' : format.amount(Number(stats.earned) * (prices.keep3rv1) - Number(stats.fees) * (prices.ethereum), 2, 2)}
+							{!stats.isSuccessful ? '-' : format.amount(Number(stats.earned) - Number(stats.fees), 2, 2)}
 						</b>
 					</div>
 				</div>
@@ -63,7 +63,7 @@ function	StatsKeeper({stats, prices}: TStatsAddress): ReactElement {
 				<div className={'flex flex-col space-y-2 bg-white p-6'}>
 					<p>{'KP3R per call'}</p>
 					<div><b className={'text-xl'}>{!stats.isSuccessful ? '-' : format.amount(Number(stats.earned) / stats.workDone, 2, 2)}</b></div>
-					<p className={'text-xs'}>{`$ per call ${!stats.isSuccessful ? '-' : format.amount(Number(stats.earned) / stats.workDone * prices.keep3rv1, 2, 2)}`}</p>
+					<p className={'text-xs'}>{`$ per call ${!stats.isSuccessful ? '-' : format.amount(Number(stats.earned) / stats.workDone, 2, 2)}`}</p>
 				</div>
 
 				<div className={'flex flex-col space-y-2 bg-white p-6'}>
