@@ -38,7 +38,6 @@ function	LogsStatsPerKeeper({searchTerm}: TLogs): ReactElement {
 			.catch((): void => set_isInit(true));
 	}, []);
 
-	console.log(logs);
 	const data = React.useMemo((): unknown[] => (
 		logs
 			.filter((log): boolean => log.keeper?.includes(searchTerm))
