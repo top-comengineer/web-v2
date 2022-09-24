@@ -3,6 +3,7 @@ import	{format}					from	'@yearn-finance/web-lib/utils';
 import	useTreasury					from	'contexts/useTreasury';
 import	LogoConvex					from	'components/icons/LogoConvex';
 import	LogoYearn					from	'components/icons/LogoYearn';
+import Image from 'next/image';
 
 function	Treasury(): ReactElement {
 	const	{treasury} = useTreasury();
@@ -39,7 +40,9 @@ function	Treasury(): ReactElement {
 											treasure.protocol === 'Convex' ?
 												<LogoConvex /> :
 												treasure.protocol === 'Yearn' ?
-													<LogoYearn /> : <div />
+													<LogoYearn /> : 
+													treasure.protocol === 'Curve' ?
+														<Image src={'/curveneutral.png'} width={32} height={32} /> : <div />
 										}
 										<h3 className={'text-2xl font-bold'}>{treasure.protocol}</h3>
 									</div>

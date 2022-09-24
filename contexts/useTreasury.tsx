@@ -1,5 +1,5 @@
 import	React, {ReactElement, useContext, createContext}		from	'react';
-import	{BigNumber}												from	'ethers';
+import	{BigNumber, ethers}												from	'ethers';
 import	{Contract}												from	'ethcall';
 import	{useWeb3}												from	'@yearn-finance/web-lib/contexts';
 import	{providers, performBatchedUpdates, format}				from	'@yearn-finance/web-lib/utils';
@@ -29,7 +29,8 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 	const	[, set_nonce] = React.useState(0);
 
 	const getTreasury = React.useCallback(async (): Promise<void> => {
-		const	ethcallProvider = await providers.newEthCallProvider(provider && isActive ? provider : providers.getProvider(1));
+		const	currentProvider = provider && isActive ? provider : providers.getProvider(1);
+		const	ethcallProvider = await providers.newEthCallProvider(currentProvider);
 		const	lensPriceContract = new Contract('0x83d95e0D5f402511dB06817Aff3f9eA88224B030', LENS_PRICE_ABI);
 		const	ibaudUsdcContract = new Contract('0xbAFC4FAeB733C18411886A04679F11877D8629b1', CONVEX_REWARDS_ABI);
 		const	ibchfUsdcContract = new Contract('0x9BEc26bDd9702F4e0e4de853dd65Ec75F90b1F2e', CONVEX_REWARDS_ABI);
@@ -75,6 +76,13 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 		const	cvxContract = new Contract('0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B', CVX_ABI);
 		const	crvSusdContract = new Contract('0x22eE18aca7F3Ee920D01F25dA85840D12d98E8Ca', CONVEX_REWARDS_ABI);
 		const	crvSusdExtraRewardsContract = new Contract('0x81fCe3E10D12Da6c7266a1A169c4C96813435263', CONVEX_REWARDS_ABI); //SNX
+		const	veCRVContract = new Contract('0x5f3b5DfEb7B28CDbD7FAba78963EE202a494e2A2', CVX_ABI);
+
+		const	veCRVContractRegular = new ethers.Contract(
+			'0xA464e6DCda8AC41e03616F95f4BC98a13b8922Dc',
+			['function claim(address) public returns (uint256)'],
+			currentProvider
+		);
 
 		const	jobsCalls = [
 			cvxContract.totalSupply(),
@@ -174,9 +182,20 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 			yvEthContract.balanceOf(process.env.THE_KEEP3R as string),
 			lensPriceContract.getPriceUsdcRecommended('0xa258C4606Ca8206D8aA700cE2143D7db854D168c'),
 			yvEthContract.pricePerShare(),
-			lensPriceContract.getPriceUsdcRecommended('0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2')
+			lensPriceContract.getPriceUsdcRecommended('0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'),
+			veCRVContract.balanceOf(process.env.THE_KEEP3R as string)
 		];
-		const	resultsJobsCall = await ethcallProvider.tryAll(jobsCalls);
+		const	promise = await Promise.allSettled([
+			ethcallProvider.tryAll(jobsCalls),
+			veCRVContractRegular.callStatic.claim(process.env.THE_KEEP3R as string)
+		]);
+
+		let		resultsJobsCall: unknown[] = [];
+		let		claimable = ethers.constants.Zero;
+		if (promise[0].status === 'fulfilled')
+			resultsJobsCall = promise[0].value;
+		if (promise[1].status === 'fulfilled')
+			claimable = promise[1].value;
 
 		let	rIndex = 0;
 		const	_treasury: TTreasury[] = [];
@@ -548,8 +567,8 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 
 		// yvEth //
 		const	yvEthStacked = format.units(resultsJobsCall[rIndex++] as BigNumber, 18);
-		// const	pricePerShare = format.units(resultsJobsCall[rIndex++] as BigNumber, 18);
-		// const	ethPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
+		rIndex++; // const	pricePerShare = format.units(resultsJobsCall[rIndex++] as BigNumber, 18);
+		rIndex++; // const	ethPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
 		const	yvEthPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
 		_treasury.push({
 			name: 'yvEth',
@@ -560,6 +579,26 @@ export const TreasuryContextApp = ({children}: {children: ReactElement}): ReactE
 			unclaimedRewards: 0,
 			unclaimedRewardsUSD: 0,
 			hasNoRewards: true
+			// unclaimedRewards: (Number(yvEthStacked) * Number(pricePerShare)) - Number(yvEthStacked),
+			// unclaimedRewardsUSD: (Number(yvEthStacked) * Number(yvEthPrice)) - (Number(yvEthStacked) * Number(ethPrice))
+		});
+
+		//Locked CRV
+		const	crvLocked = format.units(resultsJobsCall[rIndex++] as BigNumber, 18);
+		console.log(crvLocked.toString());
+		const	crvLockedExtraEarned = claimable;
+		// const	pricePerShare = format.units(resultsJobsCall[rIndex++] as BigNumber, 18);
+		// const	ethPrice = format.units(resultsJobsCall[rIndex++] as BigNumber, 6);
+		_treasury.push({
+			name: 'Locked CRV',
+			protocol: 'Curve',
+			rewards: '3CRV',
+			tokenStaked: Number(crvLocked),
+			tokenStakedUSD: Number(crvLocked) * Number(crvPrice),
+			unclaimedRewards: Number(format.units(crvLockedExtraEarned, 18)),
+			unclaimedRewardsUSD: (
+				Number(format.units(crvLockedExtraEarned, 18)) * Number(threeCRVPrice)
+			)
 			// unclaimedRewards: (Number(yvEthStacked) * Number(pricePerShare)) - Number(yvEthStacked),
 			// unclaimedRewardsUSD: (Number(yvEthStacked) * Number(yvEthPrice)) - (Number(yvEthStacked) * Number(ethPrice))
 		});
