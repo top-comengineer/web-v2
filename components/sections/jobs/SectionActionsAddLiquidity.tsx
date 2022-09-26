@@ -201,7 +201,7 @@ function	SectionActionsAddLiquidity(): ReactElement {
 						onApprove(
 							pair.addressOfPair,
 							process.env.KEEP3R_V2_ADDR as string,
-							format.toSafeAmount(amountLpToken, pair.balanceOfToken1)
+							format.toSafeAmount(amountLpToken, pair.balanceOfPair)
 						);
 					}}
 					isBusy={txStatusApprove.pending}
