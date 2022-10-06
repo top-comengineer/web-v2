@@ -31,6 +31,10 @@ const	REGISTRY: TRegistry = {
 	'0xa61d82a9127B1c1a34Ce03879A068Af5b786C835': {
 		'name':'PhutureDepositManager',
 		'repository':'https://github.com/Phuture-Finance/keep3r-cli-deposit-manager-job'
+	},
+	'0xEC771dc7Bd0aA67a10b1aF124B9b9a0DC4aF5F9B': {
+		'name':'PhutureHarvesting',
+		'repository':'https://github.com/Phuture-Finance/keep3r-cli-job-phuture-savings-vault'
 	}
 };
 
